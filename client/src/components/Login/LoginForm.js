@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { Box, Button , Divider , TextField , Switch , Typography , Stack } from '@mui/material';
+import { useState } from "react";
+import { Box, Button , Divider , TextField } from '@mui/material';
+import LoginAlert from "./LoginAlert";
 
 function LoginForm({ setUser }) {
 
@@ -9,6 +10,8 @@ function LoginForm({ setUser }) {
   })
 
   const [useEmail , setUseEmail] = useState(true)
+
+  const [errors , setErrors] = useState([])
 
   function handleSubmit(e) {
     fetch("/login", {
@@ -24,6 +27,12 @@ function LoginForm({ setUser }) {
         .then((user) => {
           setUser(user)
         })}
+      else {
+        r.json()
+        .then((err)=>{
+          setErrors(err.errors)
+        })
+      }
      });
   }
   
@@ -55,6 +64,8 @@ function LoginForm({ setUser }) {
           sx={{mb:2}}/>
       }
 
+      {errors.length > 0 ? <LoginAlert errorMessage={errors[0]}/> : <></>}
+
       <TextField
         id="password"
         placeholder="Enter password..."
@@ -83,6 +94,7 @@ function LoginForm({ setUser }) {
         variant="outlined"
         sx={{color: "black"}}
         onClick={(e) => {
+          setErrors([])
           if (useEmail) {
             setCredentialPassword({
               username: "",

@@ -1,6 +1,6 @@
 import LoginForm from "./LoginForm"
-import SignupForm2 from "./SignupForm2"
-import React, { useState } from "react";
+import SignupForm from "./SignupForm"
+import { useState } from "react";
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
 import { Typography, Divider, Box, Button, Grid } from '@mui/material';
 
@@ -56,7 +56,7 @@ function Login({ setUser }) {
                     </Box>)
                     :
                     (<Box sx={{m:2}}>
-                        <SignupForm2 setUser={setUser} />
+                        <SignupForm setUser={setUser} />
                         
                         <Divider sx={{mt: 2, mb: 2}}/>
                         
