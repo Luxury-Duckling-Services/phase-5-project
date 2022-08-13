@@ -1,8 +1,16 @@
 import { Grid, Typography , Avatar , Button } from '@mui/material';
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 function AvatarBar ( { userId , viewingId , setUser } ) {
-  const [profilePicture , setProfilePicture ] = useState(null)
+  const [profilePicture , setProfilePicture] = useState(null)
+
+  useEffect( ()=> {
+    fetch(`/me`)
+    .then(r => r.json())
+    .then(r => {
+      setProfilePicture(r.profile_picture)
+    })
+}, [])
 
   const handleLogout = () => {
     fetch("/logout", {
@@ -16,8 +24,17 @@ function AvatarBar ( { userId , viewingId , setUser } ) {
   }
 
   const handleSubmitProfilePicture = (e) => {
-    setProfilePicture(e.target.files[0])
-    console.log(e.target.files[0])
+    let formData = new FormData()
+    formData.append('profile_picture' , e.target.files[0])
+
+    fetch(`/users/${userId}`, {
+      method: "PATCH",
+      body: formData
+    })
+    .then(r=> r.json())
+    .then(r=> {
+      setProfilePicture(r.profile_picture)
+    })
   }
 
   return (
@@ -28,9 +45,8 @@ function AvatarBar ( { userId , viewingId , setUser } ) {
         <Avatar
           sx={{ width: 120, height: 120 }}
           style={{alignSelf: 'center'}}
-        >
-          H
-        </Avatar>
+          src={profilePicture}
+        />
       </Grid>
 
       <Grid item container xs={4} direction='column'>
