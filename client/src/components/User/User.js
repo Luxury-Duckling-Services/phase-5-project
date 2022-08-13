@@ -1,4 +1,3 @@
-import { Button } from '@mui/material';
 import AvatarBar from './AvatarBar';
 import EditBar from './EditBar';
 

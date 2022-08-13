@@ -1,6 +1,8 @@
 import { Grid, Typography , Avatar , Button } from '@mui/material';
+import { useState } from "react"
 
-function AvatarBar ( {userId , viewingId , setUser } ) {
+function AvatarBar ( { userId , viewingId , setUser } ) {
+  const [profilePicture , setProfilePicture ] = useState(null)
 
   const handleLogout = () => {
     fetch("/logout", {
@@ -11,6 +13,11 @@ function AvatarBar ( {userId , viewingId , setUser } ) {
           setUser(null);
         }
     });
+  }
+
+  const handleSubmitProfilePicture = (e) => {
+    setProfilePicture(e.target.files[0])
+    console.log(e.target.files[0])
   }
 
   return (
@@ -48,11 +55,22 @@ function AvatarBar ( {userId , viewingId , setUser } ) {
       
     </Grid>
 
-    { userId === viewingId ? 
+    { true ? 
       <Grid container sx={{mt: 1}} align="center">
 
         <Grid item xs={4}>
-          <Button variant="outlined" sx={{fontSize: 8}}>Change Picture</Button>
+          <Button variant="outlined" sx={{fontSize: 8}} component="label">
+            Change Picture
+            <input
+              hidden
+              accept="image/*"
+              type="file"
+              onChange={(e) => {
+                handleSubmitProfilePicture(e)
+              }
+              }
+            />
+          </Button>
         </Grid>
 
         <Grid item xs={4}>
