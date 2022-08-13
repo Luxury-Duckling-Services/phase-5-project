@@ -18,7 +18,7 @@ function Login({ setUsersId }) {
                 <Typography variant="h3"
                     sx={{
                         mb:1,
-                        mt:10
+                        mt:4
                     }}
                 >
                     Sporthub
