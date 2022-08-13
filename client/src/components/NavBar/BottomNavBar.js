@@ -1,12 +1,11 @@
 import { useRef , useState , useEffect } from 'react';
 import { Box , BottomNavigation , BottomNavigationAction , Paper } from '@mui/material';
-
-import FitnessCenterOutlinedIcon from '@mui/icons-material/FitnessCenterOutlined';
+import SportsOutlinedIcon from '@mui/icons-material/SportsOutlined';
 import FeedOutlinedIcon from '@mui/icons-material/FeedOutlined';
 import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
 import PortraitOutlinedIcon from '@mui/icons-material/PortraitOutlined';
 
-function NavBar() {
+function BottomNavBar() {
 
     const [value, setValue] = useState(0);
     const ref = useRef(null);
@@ -33,7 +32,7 @@ function NavBar() {
                 }}
             >
 
-                <BottomNavigationAction label="Workout" icon={<FitnessCenterOutlinedIcon />} />
+                <BottomNavigationAction label="Workout" icon={<SportsOutlinedIcon />} />
                 <BottomNavigationAction label="Feed" icon={<FeedOutlinedIcon />} />
                 <BottomNavigationAction label="Chat" icon={<ChatOutlinedIcon />} />
                 <BottomNavigationAction label="Account" icon={<PortraitOutlinedIcon />} />
@@ -44,7 +43,7 @@ function NavBar() {
   );
 }
 
-export default NavBar
+export default BottomNavBar
 
 
 

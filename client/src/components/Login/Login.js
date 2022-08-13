@@ -1,7 +1,6 @@
 import LoginForm from "./LoginForm"
 import SignupForm from "./SignupForm"
 import { useState } from "react";
-import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
 import { Typography, Divider, Box, Button, Grid } from '@mui/material';
 
 function Login({ setUsersId }) {
@@ -15,14 +14,11 @@ function Login({ setUsersId }) {
             </Grid>
             
             <Grid align='center' item xs={6}>
-
-                <SportsSoccerIcon fontSize="large"
-                    sx={{ mt: 6 }}
-                />
             
                 <Typography variant="h3"
                     sx={{
-                        mb:1
+                        mb:1,
+                        mt:10
                     }}
                 >
                     Sporthub

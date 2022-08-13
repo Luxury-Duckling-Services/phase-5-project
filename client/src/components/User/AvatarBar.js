@@ -2,15 +2,15 @@ import { Grid, Typography , Avatar , Button } from '@mui/material';
 import { useEffect, useState } from "react"
 
 function AvatarBar ( { usersId , setUsersId } ) {
-  const [profilePicture , setProfilePicture] = useState(null)
+  const [userToViewProfilePicture , setUserToViewProfilePicture] = useState(null)
 
   useEffect( ()=> {
     fetch(`/users/${usersId.userToViewId}`)
     .then(r => r.json())
     .then( (j) => {
-      setProfilePicture(j.profile_picture)
+      setUserToViewProfilePicture(j.profile_picture)
     })
-}, [])
+  }, [])
 
   const handleLogout = () => {
     fetch("/logout", {
@@ -33,7 +33,7 @@ function AvatarBar ( { usersId , setUsersId } ) {
     })
     .then(r=> r.json())
     .then(r=> {
-      setProfilePicture(r.profile_picture)
+      setUserToViewProfilePicture(r.profile_picture)
     })
   }
 
@@ -45,7 +45,7 @@ function AvatarBar ( { usersId , setUsersId } ) {
         <Avatar
           sx={{ width: 120, height: 120 }}
           style={{alignSelf: 'center'}}
-          src={profilePicture}
+          src={userToViewProfilePicture}
         />
       </Grid>
 
@@ -71,7 +71,7 @@ function AvatarBar ( { usersId , setUsersId } ) {
       
     </Grid>
 
-    { true ? 
+    { usersId.userId === usersId.userToViewId ? 
       <Grid container sx={{mt: 1}} align="center">
 
         <Grid item xs={4}>
@@ -121,4 +121,5 @@ function AvatarBar ( { usersId , setUsersId } ) {
   </>
   );
 };
+
 export default AvatarBar;

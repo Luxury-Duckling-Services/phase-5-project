@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom"
 import { useState, useEffect } from "react"
 import Login from "./Login/Login.js"
-import NavBar from "./NavBar/NavBar.js";
+import BottomNavBar from "./NavBar/BottomNavBar.js";
 import User from "./User/User.js";
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
   return (
     <>
       <User usersId={usersId} setUsersId={setUsersId}/>
-      <NavBar />
+      <BottomNavBar />
     </>
   );
 }
