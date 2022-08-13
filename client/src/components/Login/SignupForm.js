@@ -29,7 +29,7 @@ const validationSchema = Yup.object({
         .oneOf([Yup.ref('password'), null], 'Passwords must match.')
 });
 
-function SignupForm({ setUser }) {
+function SignupForm({ setUsersId }) {
 
     const [errors , setErrors] = useState([])
 
@@ -53,7 +53,12 @@ function SignupForm({ setUser }) {
             .then((r) => {
                 if (r.ok) {
                     r.json()
-                    .then((user) => setUser(user));
+                    .then( (j) => {
+                        setUsersId({
+                            userId: j.id,
+                            userToViewId: j.id
+                        })
+                    });
                 }
                 else {
                     r.json()

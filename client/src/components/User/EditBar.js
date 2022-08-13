@@ -1,7 +1,7 @@
 import { Table , TableBody , TableCell , TableContainer , TableRow  } from '@mui/material';
 import { Paper } from '@mui/material'
 
-function EditBar( {userId , viewingId} ) {
+function EditBar( {usersId} ) {
   return (
     <TableContainer component={Paper} sx={{mt:2}}>
       <Table>
@@ -41,8 +41,6 @@ function EditBar( {userId , viewingId} ) {
         </TableBody>
       </Table>
     </TableContainer>
-
-
   );
 }
 

@@ -8,6 +8,10 @@ class UsersController < ApplicationController
     end
 
     def show
+        render json: User.find(params[:id])
+    end
+
+    def show_myself
         render json: @current_user
     end
 

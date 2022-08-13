@@ -1,13 +1,14 @@
 import AvatarBar from './AvatarBar';
 import EditBar from './EditBar';
 
-function User( {userId , viewingId , setUser} ) {
+function User( {usersId , setUsersId } ) {
 
     return (
         <>
-        <AvatarBar userId={userId} viewingId={viewingId} setUser={setUser} />
+            <AvatarBar usersId={usersId} setUsersId={setUsersId}/>
 
-        <EditBar />
+            <EditBar usersId={usersId}/>
+        
         </>
     )
 

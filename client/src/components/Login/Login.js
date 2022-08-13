@@ -4,7 +4,7 @@ import { useState } from "react";
 import SportsSoccerIcon from '@mui/icons-material/SportsSoccer';
 import { Typography, Divider, Box, Button, Grid } from '@mui/material';
 
-function Login({ setUser }) {
+function Login({ setUsersId }) {
     
     const [showLogin, setShowLogin] = useState(true);
     
@@ -38,7 +38,7 @@ function Login({ setUser }) {
             
                 {showLogin ?
                     (<Box sx={{m:2}}>
-                        <LoginForm setUser={setUser} />
+                        <LoginForm setUsersId={setUsersId} />
                         
                         <Divider sx={{mt: 2, mb: 2}} />
                         
@@ -56,7 +56,7 @@ function Login({ setUser }) {
                     </Box>)
                     :
                     (<Box sx={{m:2}}>
-                        <SignupForm setUser={setUser} />
+                        <SignupForm setUsersId={setUsersId}/>
                         
                         <Divider sx={{mt: 2, mb: 2}}/>
                         

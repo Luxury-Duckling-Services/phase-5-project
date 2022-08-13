@@ -1,43 +1,33 @@
 import { Routes, Route } from "react-router-dom"
 import { useState, useEffect } from "react"
-
-
-
-
-
-
 import Login from "./Login/Login.js"
 import NavBar from "./NavBar/NavBar.js";
 import User from "./User/User.js";
 
-
-
 function App() {
-  const [user, setUser] = useState(null);
-  const [viewingId , setViewingId] = useState(null);
+  const [usersId, setUsersId] = useState(null);
 
   useEffect(() => {
     fetch("/me")
       .then(r => {
         if (r.ok) {
           r.json()
-          .then(user => {
-            setUser(user)
-            setViewingId(user.id)
+          .then( (j) => {
+            setUsersId( {
+              userId: j.id,
+              userToViewId: j.id
+            })
           })
         }
       })
   }, []);
 
-  
-
-  if (!user) return <Login setUser={setUser}/>;
+  if (!usersId) return <Login setUsersId={setUsersId}/>;
 
   return (
     <>
-      <User userId={user.id} viewingId={viewingId} setUser={setUser}/>
+      <User usersId={usersId} setUsersId={setUsersId}/>
       <NavBar />
-      
     </>
   );
 }

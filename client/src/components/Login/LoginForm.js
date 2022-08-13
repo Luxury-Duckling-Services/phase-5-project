@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Box, Button , Divider , TextField } from '@mui/material';
 import LoginAlert from "./LoginAlert";
 
-function LoginForm({ setUser }) {
+function LoginForm({ setUsersId }) {
 
   const [credentialPassword, setCredentialPassword] = useState({
     email: "",
@@ -24,8 +24,11 @@ function LoginForm({ setUser }) {
     .then((r) => {
       if (r.ok) {
         r.json()
-        .then((user) => {
-          setUser(user)
+        .then((j) => {
+          setUsersId({
+            userId: j.id,
+            userToViewId: j.id
+          })
         })}
       else {
         r.json()

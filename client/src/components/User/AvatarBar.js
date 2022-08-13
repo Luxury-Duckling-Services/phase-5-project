@@ -1,14 +1,14 @@
 import { Grid, Typography , Avatar , Button } from '@mui/material';
 import { useEffect, useState } from "react"
 
-function AvatarBar ( { userId , viewingId , setUser } ) {
+function AvatarBar ( { usersId , setUsersId } ) {
   const [profilePicture , setProfilePicture] = useState(null)
 
   useEffect( ()=> {
-    fetch(`/me`)
+    fetch(`/users/${usersId.userToViewId}`)
     .then(r => r.json())
-    .then(r => {
-      setProfilePicture(r.profile_picture)
+    .then( (j) => {
+      setProfilePicture(j.profile_picture)
     })
 }, [])
 
@@ -18,7 +18,7 @@ function AvatarBar ( { userId , viewingId , setUser } ) {
     })
     .then((r) => {
         if (r.ok) {
-          setUser(null);
+          setUsersId(null);
         }
     });
   }
@@ -27,7 +27,7 @@ function AvatarBar ( { userId , viewingId , setUser } ) {
     let formData = new FormData()
     formData.append('profile_picture' , e.target.files[0])
 
-    fetch(`/users/${userId}`, {
+    fetch(`/users/${usersId.userId}`, {
       method: "PATCH",
       body: formData
     })
