@@ -3,7 +3,7 @@ class UserSerializer < ActiveModel::Serializer
 
   has_many :sports_categories
 
-  attributes :id, :username, :name, :profile_picture, :training_location, :achievement_goal
+  attributes :id, :username, :name, :profile_picture
 
   def profile_picture
     rails_blob_path(object.profile_picture, only_path: true) if object.profile_picture.attached?

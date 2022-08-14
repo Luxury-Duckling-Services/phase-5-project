@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Box, Button , TextField } from '@mui/material';
+import { Box, Button , TextField , FormControl , MenuItem , Select , InputLabel } from '@mui/material';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import LoginAlert from "./LoginAlert";
@@ -30,7 +30,6 @@ const validationSchema = Yup.object({
 });
 
 function SignupForm({ setUsersId }) {
-
     const [errors , setErrors] = useState([])
 
     const formik = useFormik({
@@ -136,7 +135,7 @@ function SignupForm({ setUsersId }) {
                 error={formik.touched.password_confirmation && Boolean(formik.errors.password_confirmation)}
                 helperText={formik.touched.password_confirmation && formik.errors.password_confirmation}
             />
-                
+   
             <Button
                 variant="outlined"
                 sx={{color: "black"}}

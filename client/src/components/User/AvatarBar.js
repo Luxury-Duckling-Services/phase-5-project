@@ -83,8 +83,7 @@ function AvatarBar ( { usersId , setUsersId } ) {
               type="file"
               onChange={(e) => {
                 handleSubmitProfilePicture(e)
-              }
-              }
+              }}
             />
           </Button>
         </Grid>

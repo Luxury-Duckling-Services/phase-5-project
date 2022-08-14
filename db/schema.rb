@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 2022_08_13_184501) do
 
   create_table "sports_categories", force: :cascade do |t|
     t.string "sport_name"
+    t.string "sport_image"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -61,8 +62,6 @@ ActiveRecord::Schema.define(version: 2022_08_13_184501) do
     t.string "name"
     t.string "username"
     t.string "password_digest"
-    t.string "training_location"
-    t.string "achievement_goal"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -5,8 +5,6 @@ class CreateUsers < ActiveRecord::Migration[6.1]
       t.string :name
       t.string :username
       t.string :password_digest
-      t.string :training_location
-      t.string :achievement_goal
 
       t.timestamps
     end
