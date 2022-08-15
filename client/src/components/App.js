@@ -8,6 +8,7 @@ function App() {
   const [usersId, setUsersId] = useState(null);
 
   useEffect(() => {
+    console.log("App loaded")
     fetch("/me")
       .then(r => {
         if (r.ok) {
