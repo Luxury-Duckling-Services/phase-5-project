@@ -15,6 +15,10 @@ class UsersController < ApplicationController
         render json: @current_user
     end
 
+    def search_username
+        render json: User.where("username like ?" , "%#{params[:username]}%")
+    end
+
     def update
         user = User.find(params[:id])
         user.update!(user_params)

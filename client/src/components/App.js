@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom"
 import { useState, useEffect } from "react"
 import Login from "./Login/Login.js"
+import TopNavBar from "./NavBar/TopNavBar.js";
 import BottomNavBar from "./NavBar/BottomNavBar.js";
 import User from "./User/User.js";
 
@@ -8,7 +9,6 @@ function App() {
   const [usersId, setUsersId] = useState(null);
 
   useEffect(() => {
-    console.log("App loaded")
     fetch("/me")
       .then(r => {
         if (r.ok) {
@@ -27,7 +27,8 @@ function App() {
 
   return (
     <>
-      <User usersId={usersId} setUsersId={setUsersId}/>
+      <TopNavBar />
+        <User usersId={usersId} setUsersId={setUsersId}/>
       <BottomNavBar />
     </>
   );

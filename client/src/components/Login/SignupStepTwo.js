@@ -9,7 +9,6 @@ function SignupStepTwo( { setUsersId , newUser }) {
         fetch("/sports_categories")
         .then( (r) =>r.json())
         .then( (j) =>{
-            console.log(j)
             setSports(j)
         })
     } , [])
@@ -30,7 +29,6 @@ function SignupStepTwo( { setUsersId , newUser }) {
             if (r.ok) {
                 r.json()
                 .then( (j) =>{
-                    console.log(j)
                     setUsersId({
                         userId: j.id,
                         userToViewId: j.id})
@@ -40,7 +38,6 @@ function SignupStepTwo( { setUsersId , newUser }) {
     }
 
     function handleChange(e) {
-        console.log(e.target.value)
         setSelectedSports(e.target.value)
     }
     
