@@ -1,9 +1,8 @@
-import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/material/Autocomplete';
-import CircularProgress from '@mui/material/CircularProgress';
+import { TextField , Autocomplete , CircularProgress , Avatar , Box, Typography }from '@mui/material';
 import { useState } from "react";
+import { Link } from 'react-router-dom';
 
-function SearchBar() {
+function SearchBar( { usersId , setUsersId} ) {
   const [open, setOpen] = useState(false);
   const [options, setOptions] = useState([]);
   const [searchUsername , setSearchUsername] = useState("")
@@ -15,7 +14,7 @@ function SearchBar() {
       fetch(`/search_username/${e.target.value}`)
       .then( (r) =>r.json() )
       .then( (j) => {
-        setOptions(j.map( user => (user.username)))
+        setOptions(j)
       })
     }
   }
@@ -30,8 +29,22 @@ function SearchBar() {
         setOpen(false);
       }}
       options={options}
+      getOptionLabel={(option) => option.username}
       loading={loading}
       sx={{ width: "45%" }}
+      renderOption={(props , option)=> (
+        <Box
+          component={Link}
+          to="/account"
+          {...props}
+          onClick={(e)=>{
+            console.log(usersId)
+            setUsersId( { ...usersId , userToViewId: option.id })
+        }}>
+          <Avatar sx={{mr:1}} src={option.profile_picture}/>
+          <Typography>{option.username}</Typography>
+        </Box>
+      )}
       renderInput={(params) =>
         <TextField
           value={searchUsername}

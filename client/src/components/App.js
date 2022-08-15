@@ -16,7 +16,7 @@ function App() {
           .then( (j) => {
             setUsersId( {
               userId: j.id,
-              userToViewId: j.id
+              userToViewId: null
             })
           })
         }
@@ -27,8 +27,14 @@ function App() {
 
   return (
     <>
-      <TopNavBar />
-        <User usersId={usersId} setUsersId={setUsersId}/>
+      <TopNavBar usersId={usersId} setUsersId={setUsersId} />
+      
+      <Routes>
+        
+        <Route path="/account" element={ <User usersId={usersId} setUsersId={setUsersId}/> } />
+      
+      </Routes>
+      
       <BottomNavBar />
     </>
   );
