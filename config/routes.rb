@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :create, :update]
   resources :sports_categories, only: [:index]
   resources :favorite_sports, only: [:create]
+  resources :followings, only: [:create. :destroy]
 
   get "/me", to: "users#show_myself"
   post "/login", to: "sessions#create"
