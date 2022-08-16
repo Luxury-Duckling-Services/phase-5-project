@@ -9,4 +9,10 @@ class User < ApplicationRecord
 
     has_many :favorite_sports
     has_many :sports_categories, through: :favorite_sports
+
+    has_many :following_as_requesters, foreign_key: :requester_id, class_name: "Following"
+    has_many :approvers, through: :following_as_requesters
+
+    has_many :following_as_approvers, foreign_key: :approver_id, class_name: "Following"
+    has_many :requesters, through: :following_as_approvers
 end

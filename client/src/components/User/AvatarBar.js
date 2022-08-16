@@ -2,8 +2,8 @@ import { Grid, Typography , Avatar , Button } from '@mui/material';
 import { useEffect, useState } from "react"
 
 function AvatarBar ( { usersId , setUsersId } ) {
-  const [userToViewProfilePicture , setUserToViewProfilePicture] = useState(null)
-
+  
+  const [ userToViewProfilePicture , setUserToViewProfilePicture ] = useState(null)
   useEffect( ()=> {
     fetch(`/users/${usersId.userToViewId}`)
     .then(r => r.json())
@@ -11,6 +11,30 @@ function AvatarBar ( { usersId , setUsersId } ) {
       setUserToViewProfilePicture(j.profile_picture)
     })
   }, [usersId.userToViewId])
+
+  const [ listsOfFollowersAndFollowings , setListsOfFollowersAndFollowings] = useState({
+    listOfFollowers: [] ,
+    listOfFollowings: []
+  })
+  useEffect( ()=> {
+    fetch(`/list_of_followers_and_followings/${usersId.userToViewId}`)
+    .then(r => r.json())
+    .then( (j)=> {
+      setListsOfFollowersAndFollowings( { ...listsOfFollowersAndFollowings , listOfFollowers: j.list_of_followers , listOfFollowings: j.list_of_followings } )
+    })
+  }, [usersId.userToViewId] )
+
+  const [ followingOrNot , setFollowingOrNot ] = useState(null)
+  useEffect( ()=> {
+    fetch(`/following_or_not/${usersId.userId}/${usersId.userToViewId}`)
+    .then(r=>r.json())
+    .then(j=> {
+      setFollowingOrNot(j.following_or_not)
+    })
+  }, [usersId.userToViewId])
+
+  
+
 
   const handleLogout = () => {
     fetch("/logout", {
@@ -51,7 +75,7 @@ function AvatarBar ( { usersId , setUsersId } ) {
 
       <Grid item container xs={4} direction='column'>
         <Grid item>
-          <Typography sx={{mt: 5}}>5000000</Typography>
+          <Typography sx={{mt: 5}}>{listsOfFollowersAndFollowings.listOfFollowers.length}</Typography>
         </Grid>
 
         <Grid item>
@@ -61,7 +85,7 @@ function AvatarBar ( { usersId , setUsersId } ) {
 
       <Grid item container xs={4} direction='column'>
         <Grid item>
-          <Typography sx={{mt: 5}}>250</Typography>
+          <Typography sx={{mt: 5}}>{listsOfFollowersAndFollowings.listOfFollowings.length}</Typography>
         </Grid>
 
         <Grid item>
@@ -107,7 +131,7 @@ function AvatarBar ( { usersId , setUsersId } ) {
         </Grid>
 
         <Grid item xs={4}>
-          {0 === 1? <Button variant="outlined" sx={{fontSize: 8}}>Follow</Button> : <Button variant="outlined" sx={{fontSize: 8}}>Unfollow</Button> }
+          {followingOrNot? <Button variant="outlined" sx={{fontSize: 8}}>Unfollow</Button> : <Button variant="outlined" sx={{fontSize: 8}}>Follow</Button> }
         </Grid>
 
         <Grid item xs={4}>
