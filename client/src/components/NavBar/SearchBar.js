@@ -31,18 +31,18 @@ function SearchBar( { usersId , setUsersId} ) {
       options={options}
       getOptionLabel={(option) => option.username}
       loading={loading}
-      sx={{ width: "45%" }}
+      sx={{ width: "50%" , mt:1 }}
       renderOption={(props , option)=> (
         <Box
+          style={{ textDecoration: 'none' }}
           component={Link}
           to="/account"
           {...props}
           onClick={(e)=>{
-            console.log(usersId)
             setUsersId( { ...usersId , userToViewId: option.id })
         }}>
           <Avatar sx={{mr:1}} src={option.profile_picture}/>
-          <Typography>{option.username}</Typography>
+          <Typography color="textPrimary">{option.username}</Typography>
         </Box>
       )}
       renderInput={(params) =>

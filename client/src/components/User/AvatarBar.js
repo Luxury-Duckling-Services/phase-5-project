@@ -8,7 +8,6 @@ function AvatarBar ( { usersId , setUsersId } ) {
     fetch(`/users/${usersId.userToViewId}`)
     .then(r => r.json())
     .then( (j) => {
-      console.log('AvatarBar')
       setUserToViewProfilePicture(j.profile_picture)
     })
   }, [usersId.userToViewId])

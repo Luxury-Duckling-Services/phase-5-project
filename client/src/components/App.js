@@ -16,7 +16,7 @@ function App() {
           .then( (j) => {
             setUsersId( {
               userId: j.id,
-              userToViewId: null
+              userToViewId: j.id
             })
           })
         }

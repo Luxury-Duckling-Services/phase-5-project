@@ -10,7 +10,6 @@ function EditBar( { usersId } ) {
         fetch(`/users/${usersId.userToViewId}`)
         .then(r => r.json())
         .then( (j) => {
-            console.log('EditBar')
             setUserToViewDetails(j)
             setFavoriteSportsToView(j.sports_categories)
         })

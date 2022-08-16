@@ -5,7 +5,7 @@ import SearchBar from "./SearchBar.js"
 function TopNavBar( { usersId , setUsersId} ) {
 
     return (
-      <AppBar position="sticky" sx={{backgroundColor: "white"}}>
+      <AppBar position="sticky" sx={{backgroundColor: "white" , height:70}}>
         <Container maxWidth="xl">
             <Toolbar disableGutters>
                 
