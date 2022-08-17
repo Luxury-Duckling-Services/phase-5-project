@@ -12,6 +12,15 @@ function AvatarBar ( { usersId , setUsersId } ) {
     })
   }, [usersId.userToViewId])
 
+  const [ followingOrNot , setFollowingOrNot ] = useState(null)
+  useEffect( ()=> {
+    fetch(`/following_or_not/${usersId.userId}/${usersId.userToViewId}`)
+    .then(r=>r.json())
+    .then(j=> {
+      setFollowingOrNot(j.following_or_not)
+    })
+  }, [usersId.userToViewId])
+
   const [ listsOfFollowersAndFollowings , setListsOfFollowersAndFollowings] = useState({
     listOfFollowers: [] ,
     listOfFollowings: []
@@ -22,19 +31,21 @@ function AvatarBar ( { usersId , setUsersId } ) {
     .then( (j)=> {
       setListsOfFollowersAndFollowings( { ...listsOfFollowersAndFollowings , listOfFollowers: j.list_of_followers , listOfFollowings: j.list_of_followings } )
     })
-  }, [usersId.userToViewId] )
+  }, [usersId.userToViewId , followingOrNot] )
 
-  const [ followingOrNot , setFollowingOrNot ] = useState(null)
-  useEffect( ()=> {
-    fetch(`/following_or_not/${usersId.userId}/${usersId.userToViewId}`)
-    .then(r=>r.json())
-    .then(j=> {
-      setFollowingOrNot(j.following_or_not)
+  const handleToggle = () => {
+    fetch(`/toggle_following`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        requester_id: usersId.userId,
+        approver_id: usersId.userToViewId
+      })
     })
-  }, [usersId.userToViewId])
-
-  
-
+    .then(setFollowingOrNot(!followingOrNot))
+  }
 
   const handleLogout = () => {
     fetch("/logout", {
@@ -131,7 +142,7 @@ function AvatarBar ( { usersId , setUsersId } ) {
         </Grid>
 
         <Grid item xs={4}>
-          {followingOrNot? <Button variant="outlined" sx={{fontSize: 8}}>Unfollow</Button> : <Button variant="outlined" sx={{fontSize: 8}}>Follow</Button> }
+          <Button variant="outlined" sx={{fontSize: 8}} onClick={handleToggle}>{followingOrNot? "Unfollow" : "Follow"}</Button>
         </Grid>
 
         <Grid item xs={4}>

@@ -14,13 +14,15 @@ class FollowingsController < ApplicationController
         render json: { following_or_not: Following.where(requester_id: params[:user_id] , approver_id: params[:user_to_view_id]).exists?}
     end
 
-    # def toggle_following
-    #     if Following.where(requester_id: params[:requester_id] , approver_id: params[:approver_id]).exists?
-    #         render { }
-    #     else
-    #         following = Following.create!(friendship_params)
-    #     end
-    # end
+    def toggle_following
+        if Following.where(requester_id: params[:requester_id] , approver_id: params[:approver_id]).exists?
+            Following.find_by(requester_id: params[:requester_id] , approver_id: params[:approver_id]).destroy
+            head :no_content
+        else
+            following = Following.create!(following_params)
+            render json: following, status: :created
+        end
+    end
 
     def lists_of_followers_and_followings
         render json: {

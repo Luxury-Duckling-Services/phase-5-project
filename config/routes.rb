@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   
   get '/list_of_followers_and_followings/:user_to_view_id', to: "followings#lists_of_followers_and_followings"
   get '/following_or_not/:user_id/:user_to_view_id', to: "followings#following_or_not"
-  # patch '/toggle_following', to: "followings#toggle_following"
+  patch '/toggle_following', to: "followings#toggle_following"
 
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!
