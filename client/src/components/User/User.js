@@ -1,7 +1,7 @@
 import AvatarBar from './AvatarBar';
 import EditBar from './EditBar';
 
-function User( {usersId , setUsersId } ) {
+function User( { usersId , setUsersId } ) {
 
     return (
         <>

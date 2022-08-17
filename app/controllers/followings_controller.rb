@@ -1,15 +1,5 @@
 class FollowingsController < ApplicationController
 
-    # def create
-    #     following = Following.create!(friendship_params)
-    #     render json: following, status: :created
-    # end
-
-    # def destroy
-    #     Following.find_by(requester_id: params[:requester_id] , approver_id: params[:approver_id]).destroy
-    #     head :no_content
-    # end
-
     def following_or_not
         render json: { following_or_not: Following.where(requester_id: params[:user_id] , approver_id: params[:user_to_view_id]).exists?}
     end

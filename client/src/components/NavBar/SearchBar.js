@@ -31,7 +31,7 @@ function SearchBar( { usersId , setUsersId} ) {
       options={options}
       getOptionLabel={(option) => option.username}
       loading={loading}
-      sx={{ width: "50%" , mt:1 }}
+      sx={{ width: "100%" , mt:1 }}
       renderOption={(props , option)=> (
         <Box
           style={{ textDecoration: 'none' }}

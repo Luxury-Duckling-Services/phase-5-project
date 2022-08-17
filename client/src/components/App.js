@@ -35,7 +35,7 @@ function App() {
       
       </Routes>
       
-      <BottomNavBar />
+      <BottomNavBar usersId={usersId} setUsersId={setUsersId} />
     </>
   );
 }
