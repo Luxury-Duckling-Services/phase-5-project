@@ -1,9 +1,11 @@
 import { Button , InputLabel , Select , OutlinedInput , MenuItem , Chip , Box , Avatar , FormControl } from '@mui/material';
 import { useState , useEffect } from 'react'
+import { useNavigate } from "react-router-dom";
 
 function SignupStepTwo( { setUsersId , newUser }) {
     const [sports , setSports] = useState([])
     const [selectedSports, setSelectedSports] = useState([])
+    const nav = useNavigate();
 
     useEffect( ()=> {
         fetch("/sports_categories")
@@ -32,6 +34,7 @@ function SignupStepTwo( { setUsersId , newUser }) {
                     setUsersId({
                         userId: j.id,
                         userToViewId: j.id})
+                    nav("/workout");
                 })
             }
         })

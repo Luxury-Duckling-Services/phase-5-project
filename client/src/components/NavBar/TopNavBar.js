@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { AppBar, Fab , Grid, Badge } from '@mui/material';
 import SearchBar from "./SearchBar.js"
-import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
+import Create from "../CreateAndFork/Create.js"
 import ContentCopyOutlinedIcon from '@mui/icons-material/ContentCopyOutlined';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
 import QuestionAnswerOutlinedIcon from '@mui/icons-material/QuestionAnswerOutlined';
@@ -18,9 +18,7 @@ function TopNavBar( { usersId , setUsersId} ) {
         >
           
           <Grid item xs={1.5} align="center">
-            <Fab size="small" color="secondary" sx={{mt:1.75}}>
-              <AddOutlinedIcon/>
-            </Fab>
+            <Create />
           </Grid>
             
           <Grid item xs={1.5} align="center">    

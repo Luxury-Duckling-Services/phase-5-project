@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Box, Button , Divider , TextField } from '@mui/material';
 import LoginAlert from "./LoginAlert";
 
 function LoginForm({ setUsersId }) {
+  const nav = useNavigate();
 
   const [credentialPassword, setCredentialPassword] = useState({
     email: "",
@@ -14,6 +16,7 @@ function LoginForm({ setUsersId }) {
   const [errors , setErrors] = useState([])
 
   function handleSubmit(e) {
+    e.preventDefault()
     fetch("/login", {
       method: "POST",
       headers: {
@@ -29,6 +32,7 @@ function LoginForm({ setUsersId }) {
             userId: j.id,
             userToViewId: j.id
           })
+          nav("/workout");
         })}
       else {
         r.json()
@@ -86,7 +90,7 @@ function LoginForm({ setUsersId }) {
       <Button
         variant="outlined"
         sx={{color: "black"}}
-        onClick={handleSubmit}
+        onClick={(e)=>{handleSubmit(e)}}
       >
         Log In
       </Button>
