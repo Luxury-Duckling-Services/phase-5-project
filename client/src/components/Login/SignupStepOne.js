@@ -69,79 +69,79 @@ function SignupStepOne({ setActiveStep , setNewUser }) {
 
     return (
         <form onSubmit={formik.handleSubmit}>
-        <Box>
-            <TextField
-                id="username"
-                label="Username"
-                placeholder="Pick your unique username..."
-                value={formik.values.username}
-                fullWidth
-                onChange={formik.handleChange}
-                sx={{mb:2}}
-                error={formik.touched.username && Boolean(formik.errors.username)}
-                helperText={formik.touched.username && formik.errors.username}
-            />
-            {errors.includes('Username has already been taken') ? <LoginAlert errorMessage={'Username has already been taken.'}/> : <></> }
+            <Box>
+                <TextField
+                    id="username"
+                    label="Username"
+                    placeholder="Pick your unique username..."
+                    value={formik.values.username}
+                    fullWidth
+                    onChange={formik.handleChange}
+                    sx={{mb:2}}
+                    error={formik.touched.username && Boolean(formik.errors.username)}
+                    helperText={formik.touched.username && formik.errors.username}
+                />
+                {errors.includes('Username has already been taken') ? <LoginAlert errorMessage={'Username has already been taken.'}/> : <></> }
 
-            <TextField
-                id="email"
-                label="Email"
-                placeholder="Enter your email..."
-                value={formik.values.email}
-                fullWidth
-                onChange={formik.handleChange}
-                sx={{mb:2}}
-                error={formik.touched.email && Boolean(formik.errors.email)}
-                helperText={formik.touched.email && formik.errors.email}
-            />
-            {errors.includes('Email has already been taken') ? <LoginAlert errorMessage={'Email has already been taken.'}/> : <></> }
+                <TextField
+                    id="email"
+                    label="Email"
+                    placeholder="Enter your email..."
+                    value={formik.values.email}
+                    fullWidth
+                    onChange={formik.handleChange}
+                    sx={{mb:2}}
+                    error={formik.touched.email && Boolean(formik.errors.email)}
+                    helperText={formik.touched.email && formik.errors.email}
+                />
+                {errors.includes('Email has already been taken') ? <LoginAlert errorMessage={'Email has already been taken.'}/> : <></> }
 
-            <TextField
-                id="name"
-                label="Full Name"
-                placeholder="Enter your full name..."
-                value={formik.values.name}
-                fullWidth
-                onChange={formik.handleChange}
-                sx={{mb:2}}
-                error={formik.touched.name && Boolean(formik.errors.name)}
-                helperText={formik.touched.name && formik.errors.name}
-            />
+                <TextField
+                    id="name"
+                    label="Full Name"
+                    placeholder="Enter your full name..."
+                    value={formik.values.name}
+                    fullWidth
+                    onChange={formik.handleChange}
+                    sx={{mb:2}}
+                    error={formik.touched.name && Boolean(formik.errors.name)}
+                    helperText={formik.touched.name && formik.errors.name}
+                />
 
-            <TextField
-                id="password"
-                label="Password"
-                placeholder="Enter a strong password..."
-                value={formik.values.password}
-                onChange={formik.handleChange}
-                sx={{mb:2}}
-                fullWidth
-                type="password"
-                error={formik.touched.password && Boolean(formik.errors.password)}
-                helperText={formik.touched.password && formik.errors.password}
-            />
-            
-            <TextField
-                id="password_confirmation"
-                placeholder="Confirm your password..."
-                label="Password Confirmation"
-                value={formik.values.password_confirmation}
-                onChange={formik.handleChange}
-                sx={{mb:2}}
-                fullWidth
-                type="password"
-                error={formik.touched.password_confirmation && Boolean(formik.errors.password_confirmation)}
-                helperText={formik.touched.password_confirmation && formik.errors.password_confirmation}
-            />
-   
-            <Button
-                variant="outlined"
-                sx={{color: "black"}}
-                type="submit"
-            >
-                Sign Up & Next
-            </Button>
-        </Box>
+                <TextField
+                    id="password"
+                    label="Password"
+                    placeholder="Enter a strong password..."
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
+                    sx={{mb:2}}
+                    fullWidth
+                    type="password"
+                    error={formik.touched.password && Boolean(formik.errors.password)}
+                    helperText={formik.touched.password && formik.errors.password}
+                />
+                
+                <TextField
+                    id="password_confirmation"
+                    placeholder="Confirm your password..."
+                    label="Password Confirmation"
+                    value={formik.values.password_confirmation}
+                    onChange={formik.handleChange}
+                    sx={{mb:2}}
+                    fullWidth
+                    type="password"
+                    error={formik.touched.password_confirmation && Boolean(formik.errors.password_confirmation)}
+                    helperText={formik.touched.password_confirmation && formik.errors.password_confirmation}
+                />
+    
+                <Button
+                    variant="outlined"
+                    sx={{color: "black"}}
+                    type="submit"
+                >
+                    Sign Up & Next
+                </Button>
+            </Box>
         </form>
     )
 }
