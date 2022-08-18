@@ -15,4 +15,6 @@ class User < ApplicationRecord
 
     has_many :following_as_approvers, foreign_key: :approver_id, class_name: "Following"
     has_many :requesters, through: :following_as_approvers
+
+    has_many :drills
 end

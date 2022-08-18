@@ -7,13 +7,14 @@ function EditBar( { usersId } ) {
     const [favoriteSportsToView , setFavoriteSportsToView] = useState([])
 
     useEffect( ()=> {
+
         fetch(`/users/${usersId.userToViewId}`)
         .then(r => r.json())
         .then( (j) => {
             setUserToViewDetails(j)
             setFavoriteSportsToView(j.sports_categories)
         })
-    }, [usersId.userToViewId])
+    }, [usersId])
 
     return (
         <TableContainer component={Paper} sx={{mt:2}}>

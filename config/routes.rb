@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :drills
   resources :users, only: [:show, :create, :update]
   resources :sports_categories, only: [:index]
   resources :favorite_sports, only: [:create]

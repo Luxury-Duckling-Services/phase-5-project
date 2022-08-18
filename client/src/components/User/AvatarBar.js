@@ -5,21 +5,22 @@ function AvatarBar ( { usersId , setUsersId } ) {
   
   const [ userToViewProfilePicture , setUserToViewProfilePicture ] = useState(null)
   useEffect( ()=> {
+
     fetch(`/users/${usersId.userToViewId}`)
     .then(r => r.json())
     .then( (j) => {
       setUserToViewProfilePicture(j.profile_picture)
     })
-  }, [usersId.userToViewId])
+  }, [usersId])
 
   const [ followingOrNot , setFollowingOrNot ] = useState(null)
   useEffect( ()=> {
     fetch(`/following_or_not/${usersId.userId}/${usersId.userToViewId}`)
-    .then(r=>r.json())
-    .then(j=> {
-      setFollowingOrNot(j.following_or_not)
+    .then(r => r.json())
+    .then((j) => {
+        setFollowingOrNot(j.following_or_not)
     })
-  }, [usersId.userToViewId])
+  }, [usersId])
 
   const [ listsOfFollowersAndFollowings , setListsOfFollowersAndFollowings] = useState({
     listOfFollowers: [] ,
@@ -29,9 +30,9 @@ function AvatarBar ( { usersId , setUsersId } ) {
     fetch(`/list_of_followers_and_followings/${usersId.userToViewId}`)
     .then(r => r.json())
     .then( (j)=> {
-      setListsOfFollowersAndFollowings( { ...listsOfFollowersAndFollowings , listOfFollowers: j.list_of_followers , listOfFollowings: j.list_of_followings } )
+        setListsOfFollowersAndFollowings( (listsOfFollowersAndFollowings) => ({ ...listsOfFollowersAndFollowings , listOfFollowers: j.list_of_followers , listOfFollowings: j.list_of_followings }) )
     })
-  }, [usersId.userToViewId , followingOrNot] )
+  }, [usersId , followingOrNot] )
 
   const handleToggle = () => {
     fetch(`/toggle_following`, {
