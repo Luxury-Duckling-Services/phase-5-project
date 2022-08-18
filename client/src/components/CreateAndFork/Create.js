@@ -1,14 +1,9 @@
-import { MenuItem , Menu, Fab , Typography , Button } from '@mui/material';
-import { useState , forwardRef } from "react";
+import { MenuItem , Menu, Fab , Typography } from '@mui/material';
+import { useState } from "react";
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
-
-import { Dialog , DialogActions , DialogContent , DialogContentText , DialogTitle , Slide } from '@mui/material';
-
-const Transition = forwardRef(function Transition(props, ref) {
-    return <Slide direction="up" ref={ref} {...props} />;
-  });
-
-const toCreates = ['Create a drill', 'Create a session', 'Create a program'];
+import CreateADrill from './CreateADrill';
+import CreateASession from './CreateASession';
+import CreateAProgram from './CreateAProgram';
 
 function Create() {
     const [anchorElNav, setAnchorElNav] = useState(null);
@@ -19,14 +14,22 @@ function Create() {
         setAnchorElNav(null);
     };
 
-
-    const [open, setOpen] = useState(false);
-    const handleClickOpen = () => {
-        setOpen(true);
-      };
-    const handleClose = () => {
-        setOpen(false);
-    };
+    const [createTypeOpen, setCreateTypeOpen] = useState({
+        createADrillOpen: false,
+        createASessionOpen: false,
+        createAProgramOpen: false
+    });
+    function handleOpenCreate( typeToOpen ) {
+        setAnchorElNav(null);
+        let createTypeOpenCopy = {...createTypeOpen}
+        createTypeOpenCopy[typeToOpen] = true
+        setCreateTypeOpen({ ...createTypeOpenCopy})
+    }
+    function handleCloseCreate( typeToClose ) {
+        let createTypeOpenCopy = {...createTypeOpen}
+        createTypeOpenCopy[typeToClose] = false
+        setCreateTypeOpen({ ...createTypeOpenCopy})
+    }
 
     return (
         <Fab size="small" color="secondary" sx={{mt:1.75}} >
@@ -44,53 +47,29 @@ function Create() {
                     display: 'block'
                 }}
             >
-                {toCreates.map((toCreate) => (
-                    <MenuItem key={toCreate} onClick={(e)=> {
-                        handleCloseNavMenu()
-                        handleClickOpen()
-                        }}>
-                        <Typography variant='subtitle2'>{toCreate}</Typography>
-                    </MenuItem>
-                ))}
+                <MenuItem onClick={()=> {
+                    handleOpenCreate('createADrillOpen')
+                }}>
+                    <Typography variant='subtitle2'>Create a drill</Typography>
+                </MenuItem>
+                
+                <MenuItem onClick={()=> {
+                    handleOpenCreate('createASessionOpen')
+                }}>
+                    <Typography variant='subtitle2'>Create a session</Typography>
+                </MenuItem>
+
+                <MenuItem onClick={()=> {
+                    handleOpenCreate('createAProgramOpen')
+                }}>
+                    <Typography variant='subtitle2'>Create a program</Typography>
+                </MenuItem>
+                
             </Menu>
 
-
-            <Dialog
-                open={open}
-                TransitionComponent={Transition}
-                keepMounted
-                onClose={handleClose}
-                aria-describedby="alert-dialog-slide-description"
-            >
-                <DialogTitle>{"Use Google's location service?"}</DialogTitle>
-                <DialogContent>
-                <DialogContentText id="alert-dialog-slide-description">
-                    Let Google help apps determine location. This means sending anonymous
-                    location data to Google, even when no apps are running.
-                    Let Google help apps determine location. This means sending anonymous
-                    location data to Google, even when no apps are running.
-                    Let Google help apps determine location. This means sending anonymous
-                    location data to Google, even when no apps are running.
-                    Let Google help apps determine location. This means sending anonymous
-                    location data to Google, even when no apps are running.
-                    Let Google help apps determine location. This means sending anonymous
-                    location data to Google, even when no apps are running.
-                    Let Google help apps determine location. This means sending anonymous
-                    location data to Google, even when no apps are running.
-                    Let Google help apps determine location. This means sending anonymous
-                    location data to Google, even when no apps are running.
-                    Let Google help apps determine location. This means sending anonymous
-                    location data to Google, even when no apps are running.
-                    Let Google help apps determine location. This means sending anonymous
-                    location data to Google, even when no apps are running.
-                </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                <Button onClick={handleClose}>Disagree</Button>
-                <Button onClick={handleClose}>Agree</Button>
-                </DialogActions>
-            </Dialog>
-
+            <CreateADrill open={createTypeOpen.createADrillOpen} handleCloseCreate={handleCloseCreate}/>
+            <CreateASession open={createTypeOpen.createASessionOpen} handleCloseCreate={handleCloseCreate}/>
+            <CreateAProgram open={createTypeOpen.createAProgramOpen} handleCloseCreate={handleCloseCreate}/>
         </Fab>
     )
 }

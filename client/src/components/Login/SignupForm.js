@@ -1,4 +1,4 @@
-import { Stepper , Step , StepLabel , StepConnector }  from '@mui/material';
+import { Stepper , Step , StepLabel }  from '@mui/material';
 import { useState } from 'react'
 import SignupStepOne from "./SignupStepOne";
 import SignupStepTwo from "./SignupStepTwo";

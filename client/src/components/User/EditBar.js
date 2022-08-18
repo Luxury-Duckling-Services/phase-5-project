@@ -1,5 +1,5 @@
 import { Table , TableBody , TableCell , TableContainer , TableRow  } from '@mui/material';
-import { Paper , Avatar , Stack , Typography } from '@mui/material'
+import { Paper , Avatar , Stack } from '@mui/material'
 import { useEffect, useState } from "react"
 
 function EditBar( { usersId } ) {
