@@ -1,5 +1,10 @@
 class DrillsController < ApplicationController
-    
+    skip_before_action :authorize, only: :index
+
+    def index
+        render json: Drill.all
+    end
+
     def create
         drill = Drill.create!(drill_params)
         render json: drill, status: :created

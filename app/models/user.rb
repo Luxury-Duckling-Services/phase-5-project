@@ -17,4 +17,6 @@ class User < ApplicationRecord
     has_many :requesters, through: :following_as_approvers
 
     has_many :drills
+
+    has_many :posts
 end
