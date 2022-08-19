@@ -1,5 +1,5 @@
 class DrillsController < ApplicationController
-
+    
     def create
         drill = Drill.create!(drill_params)
         render json: drill, status: :created

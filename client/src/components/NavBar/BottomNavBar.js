@@ -11,7 +11,7 @@ function BottomNavBar( { usersId , setUsersId } ) {
     const ref = useRef(null);
     useEffect(() => {
         ref.current.ownerDocument.body.scrollTop = 0;
-      }, [value]);
+    }, [value]);
 
   return (
     <Box sx={{ pb: 7 }} ref={ref}>

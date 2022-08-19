@@ -3,6 +3,7 @@ import { useState, useEffect } from "react"
 import Login from "./Login/Login.js"
 import TopNavBar from "./NavBar/TopNavBar.js";
 import BottomNavBar from "./NavBar/BottomNavBar.js";
+import CommunityFeed from "./Feed/CommunityFeed.js";
 import User from "./User/User.js";
 
 function App() {
@@ -30,6 +31,8 @@ function App() {
       <TopNavBar usersId={usersId} setUsersId={setUsersId} />
       
       <Routes>
+        
+        <Route path="/feed" element={ <CommunityFeed usersId={usersId} setUsersId={setUsersId}/> } />
         
         <Route path="/account" element={ <User usersId={usersId} setUsersId={setUsersId}/> } />
       
