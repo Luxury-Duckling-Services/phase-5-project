@@ -1,14 +1,13 @@
-import { Button , Dialog , DialogActions , DialogContent , DialogContentText , DialogTitle , Slide } from '@mui/material';
-import { useState , forwardRef } from "react";
-import { Stepper , Step , StepLabel }  from '@mui/material';
+import { Dialog , DialogTitle , Slide } from '@mui/material';
+import { forwardRef } from "react";
 import CreateADrillStepOne from './CreateADrillStepOne';
+import CreateADrillStepTwo from './CreateADrillStepTwo';
 
 const Transition = forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-function CreateADrill( {open , handleCloseCreate} ) {
-    const [activeStep , setActiveStep] = useState(0);
+function CreateADrill( {activeStep , setActiveStep , open , handleCloseCreate} ) {
 
     return (
         <Dialog
@@ -21,57 +20,13 @@ function CreateADrill( {open , handleCloseCreate} ) {
         >
             <DialogTitle>Creat A Drill</DialogTitle>
 
-            {activeStep===0?
+            {activeStep.createADrill===0?
                 <CreateADrillStepOne activeStep={activeStep} setActiveStep={setActiveStep}/>
             :<></>}
-            
-            
 
-            {/* <DialogContent>
-                <Stepper
-                    connector={null}
-                    activeStep={activeStep}
-                    orientation="vertical"
-                    sx={{mb:2}}
-                >
-                    <Step>
-                        <StepLabel>Title and instruction for the drill</StepLabel>
-                    </Step>
-
-                    <Step>
-                        <StepLabel>Upload a video for the drill</StepLabel>
-                    </Step>
-
-                    <Step>
-                        <StepLabel>Post to the community feed</StepLabel>
-                    </Step>
-                    
-                </Stepper>
-
-                <DialogContentText>
-                    
-                </DialogContentText>
-
-            </DialogContent>
-
-                <DialogActions>
-                    {activeStep===0?
-                        <Button onClick={()=>{
-                            setActiveStep(1)
-                        }}>Create this drill & next</Button> : <></>}
-                        {activeStep===1? 
-                        <Button onClick={()=>{
-                            setActiveStep(2)
-                        }}>Finish uploading & next</Button>
-                        : <></>}  
-                    
-                    {activeStep===2? 
-                        <Button onClick={()=>{
-                            handleCloseCreate('createADrillOpen')
-                            setActiveStep(0)
-                        }}>Post</Button>
-                        : <></>}
-                </DialogActions> */}
+            {activeStep.createADrill===1?
+                <CreateADrillStepTwo activeStep={activeStep} setActiveStep={setActiveStep}/>
+            :<></>}
             
         </Dialog>
     )

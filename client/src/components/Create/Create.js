@@ -6,6 +6,12 @@ import CreateASession from './CreateASession';
 import CreateAProgram from './CreateAProgram';
 
 function Create() {
+    const [activeStep , setActiveStep] = useState({
+        createADrill: null,
+        createASession: null,
+        createAProgram: null
+    });
+
     const [anchorElNav, setAnchorElNav] = useState(null);
     const handleOpenNavMenu = (e) => {
         setAnchorElNav(e.currentTarget);
@@ -48,6 +54,8 @@ function Create() {
                 }}
             >
                 <MenuItem onClick={()=> {
+                    if (!activeStep.createADrill) {
+                        setActiveStep({...activeStep , createADrill: 0})}
                     handleOpenCreate('createADrillOpen')
                 }}>
                     <Typography variant='subtitle2'>Create a drill</Typography>
@@ -67,7 +75,7 @@ function Create() {
                 
             </Menu>
 
-            <CreateADrill open={createTypeOpen.createADrillOpen} handleCloseCreate={handleCloseCreate}/>
+            <CreateADrill activeStep={activeStep} setActiveStep={setActiveStep} open={createTypeOpen.createADrillOpen} handleCloseCreate={handleCloseCreate}/>
             <CreateASession open={createTypeOpen.createASessionOpen} handleCloseCreate={handleCloseCreate}/>
             <CreateAProgram open={createTypeOpen.createAProgramOpen} handleCloseCreate={handleCloseCreate}/>
         </Fab>
