@@ -17,7 +17,7 @@ function TopNavBar( { usersId , setUsersId} ) {
         >
           
           <Grid item xs={1.5} align="center">
-            <Create />
+            <Create usersId={usersId}/>
           </Grid>
             
           <Grid item xs={1.5} align="center">    

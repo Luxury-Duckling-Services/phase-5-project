@@ -1,8 +1,24 @@
-import { Box, Button , CardMedia , Grid } from '@mui/material';
-import { DialogActions , DialogContent } from '@mui/material';
-import { Stepper , Step , StepLabel }  from '@mui/material';
+import { Box, Button , CardMedia , Grid, Typography , DialogActions , DialogContent , Stepper , Step , StepLabel } from '@mui/material';
 
-function CreateADrillStepTwo( { activeStep , setActiveStep } ) {
+function CreateADrillStepTwo( { activeStep , setActiveStep , drillBeingCreated , setDrillBeingCreated } ) {
+
+    const handleUploadVideo = (e) => {
+        let formData = new FormData()
+        formData.append('video_data' , e.target.files[0])
+
+        fetch(`/drills/${drillBeingCreated.id}`, {
+            method: "PATCH",
+            body: formData
+        })
+        .then(r=> r.json())
+        .then( (j) => {
+            setDrillBeingCreated(j)
+        })
+    }
+
+    const handleUseThisVideoAndNext = () => {
+        setActiveStep({...activeStep , createADrill: 2})
+    }
 
     return (
         <DialogContent>
@@ -27,21 +43,25 @@ function CreateADrillStepTwo( { activeStep , setActiveStep } ) {
             </Stepper>
 
             <Box>
-                <CardMedia
-                    component="video"    
-                    controls 
-                    src="./myfile.mp4"/>
+                {drillBeingCreated.video_data ?
+                    <CardMedia
+                        component="video"    
+                        controls 
+                        src={drillBeingCreated.video_data}/>
+                    :
+                    <Typography variant="body2">Video preview will show up once uploaded.</Typography>
+                }
                     
                 <Grid container sx={{mt: 1}} align="center">
                     <Grid item xs={12}>
                         <Button variant="outlined" sx={{fontSize: 8}} component="label">
-                            Upload Video        
+                            {drillBeingCreated.video_data ? "Re-upload Video" : "Upload Video"}      
                             <input
                                 hidden
                                 accept="video/*"
                                 type="file"
                                 onChange={(e) => {
-                                        
+                                    handleUploadVideo(e)
                                 }}
                             />
                         </Button>
@@ -49,7 +69,7 @@ function CreateADrillStepTwo( { activeStep , setActiveStep } ) {
                 </Grid>
    
                 <DialogActions>
-                    <Button>
+                    <Button onClick={handleUseThisVideoAndNext} disabled={!drillBeingCreated.video_data}>
                         Use this video & next
                     </Button>
                 </DialogActions>

@@ -1,9 +1,7 @@
-import { Box, Button , TextField } from '@mui/material';
+import { Box, Button , TextField , FormHelperText , DialogActions , DialogContent , Stepper , Step , StepLabel , Select , MenuItem , InputLabel , FormControl , Avatar , CardHeader } from '@mui/material';
 import { useFormik } from 'formik';
 import { useEffect , useState } from "react";
 import * as Yup from 'yup';
-import { DialogActions , DialogContent } from '@mui/material';
-import { Stepper , Step , StepLabel , Select , MenuItem , InputLabel , FormControl , Avatar , CardHeader }  from '@mui/material';
 
 const validationSchema = Yup.object({
     drill_title: Yup
@@ -18,8 +16,9 @@ const validationSchema = Yup.object({
         .required('Required'),
 });
 
-function CreateADrillStepOne( { activeStep , setActiveStep } ) {
+function CreateADrillStepOne( { usersId , activeStep , setActiveStep , setDrillBeingCreated } ) {
     const [sports , setSports] = useState([])
+    const [errors , setErrors] = useState(null)
 
     useEffect( ()=> {
         fetch("/sports_categories")
@@ -37,8 +36,27 @@ function CreateADrillStepOne( { activeStep , setActiveStep } ) {
         },
         validationSchema: validationSchema,
         onSubmit: (values) => {
-            setActiveStep({...activeStep , createADrill: 1})
-            console.log(values)
+            fetch("/drills", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify( {...values , user_id: usersId.userId } ),
+            })
+            .then((r)=>{
+                if (r.ok) {
+                    r.json()
+                    .then((j)=> {
+                        setDrillBeingCreated( j )
+                        setActiveStep({...activeStep , createADrill: 1})
+                    })
+                } else {
+                    r.json()
+                    .then((err)=>{
+                        setErrors(err.errors)
+                    })
+                }
+            })
         }
     });
 
@@ -66,7 +84,7 @@ function CreateADrillStepOne( { activeStep , setActiveStep } ) {
 
             <form onSubmit={formik.handleSubmit}>
                 <Box>
-                    <FormControl fullWidth sx={{mb:2}}>
+                    <FormControl fullWidth sx={{mb:2}} error={errors}>
                         <InputLabel >Sports Category</InputLabel>
                         
                         <Select
@@ -90,8 +108,8 @@ function CreateADrillStepOne( { activeStep , setActiveStep } ) {
                                     </MenuItem>
                                 ) } ) }
                         </Select>
+                        {errors ? <FormHelperText>Select one category.</FormHelperText> : <></>}
                     </FormControl>
-
 
                     <TextField
                         id="drill_title"

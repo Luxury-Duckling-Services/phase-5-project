@@ -5,7 +5,7 @@ import CreateADrill from './CreateADrill';
 import CreateASession from './CreateASession';
 import CreateAProgram from './CreateAProgram';
 
-function Create() {
+function Create( { usersId } ) {
     const [activeStep , setActiveStep] = useState({
         createADrill: null,
         createASession: null,
@@ -75,7 +75,7 @@ function Create() {
                 
             </Menu>
 
-            <CreateADrill activeStep={activeStep} setActiveStep={setActiveStep} open={createTypeOpen.createADrillOpen} handleCloseCreate={handleCloseCreate}/>
+            <CreateADrill usersId={usersId} activeStep={activeStep} setActiveStep={setActiveStep} open={createTypeOpen.createADrillOpen} handleCloseCreate={handleCloseCreate}/>
             <CreateASession open={createTypeOpen.createASessionOpen} handleCloseCreate={handleCloseCreate}/>
             <CreateAProgram open={createTypeOpen.createAProgramOpen} handleCloseCreate={handleCloseCreate}/>
         </Fab>

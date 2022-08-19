@@ -67,9 +67,9 @@ function AvatarBar ( { usersId , setUsersId } ) {
       method: "PATCH",
       body: formData
     })
-    .then(r=> r.json())
-    .then(r=> {
-      setUserToViewProfilePicture(r.profile_picture)
+    .then((r)=> r.json())
+    .then((j)=> {
+      setUserToViewProfilePicture(j.profile_picture)
     })
   }
 

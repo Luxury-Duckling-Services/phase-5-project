@@ -1,13 +1,15 @@
 import { Dialog , DialogTitle , Slide } from '@mui/material';
-import { forwardRef } from "react";
+import { useState , forwardRef } from "react";
 import CreateADrillStepOne from './CreateADrillStepOne';
 import CreateADrillStepTwo from './CreateADrillStepTwo';
+import CreateADrillStepThree from './CreateADrillStepThree';
 
 const Transition = forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-function CreateADrill( {activeStep , setActiveStep , open , handleCloseCreate} ) {
+function CreateADrill( { usersId , activeStep , setActiveStep , open , handleCloseCreate} ) {
+    const [ drillBeingCreated , setDrillBeingCreated ] = useState({})
 
     return (
         <Dialog
@@ -18,14 +20,18 @@ function CreateADrill( {activeStep , setActiveStep , open , handleCloseCreate} )
                 handleCloseCreate('createADrillOpen')
             }}
         >
-            <DialogTitle>Creat A Drill</DialogTitle>
+            <DialogTitle>Create A Drill</DialogTitle>
 
             {activeStep.createADrill===0?
-                <CreateADrillStepOne activeStep={activeStep} setActiveStep={setActiveStep}/>
+                <CreateADrillStepOne usersId={usersId} activeStep={activeStep} setActiveStep={setActiveStep} setDrillBeingCreated={setDrillBeingCreated} />
             :<></>}
 
             {activeStep.createADrill===1?
-                <CreateADrillStepTwo activeStep={activeStep} setActiveStep={setActiveStep}/>
+                <CreateADrillStepTwo activeStep={activeStep} setActiveStep={setActiveStep} drillBeingCreated={drillBeingCreated} setDrillBeingCreated={setDrillBeingCreated} />
+            :<></>}
+
+            {activeStep.createADrill===2?
+                <CreateADrillStepThree activeStep={activeStep} setActiveStep={setActiveStep} drillBeingCreated={drillBeingCreated} />
             :<></>}
             
         </Dialog>
