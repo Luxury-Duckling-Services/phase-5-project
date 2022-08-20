@@ -1,7 +1,7 @@
 class PostSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
 
-  attributes :id, :post_subtitle, :workout_session, :workout_program, :drill, :workout_session, :workout_program
+  attributes :id, :post_subtitle, :workout_session, :workout_program, :drill, :workout_session, :workout_program, :created_at
 
   belongs_to :user
   belongs_to :sports_category
@@ -9,6 +9,10 @@ class PostSerializer < ActiveModel::Serializer
   # belongs_to :drill
   # belongs_to :workout_session
   # belongs_to :workout_program
+
+  def created_at
+    object.created_at.in_time_zone("America/Los_Angeles").strftime("%B %d %Y at %I:%M %p %Z")
+  end
 
   def drill
     if self.object.drill_id
