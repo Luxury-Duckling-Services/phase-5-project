@@ -1,7 +1,6 @@
 import { Box, Button , TextField , DialogActions , DialogContent , Stepper , Step , StepLabel } from '@mui/material';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import PostCard from '../Feed/PostCard';
 import { useNavigate } from "react-router-dom";
 
 const validationSchema = Yup.object({
@@ -32,12 +31,13 @@ function CreateADrillStepThree( { usersId , activeStep , setActiveStep , drillBe
                     sports_category_id: drillBeingCreated.sports_category.id
                 })
             })
-            .then(r=>r.json())
-            .then(j=>{
-                handleCloseCreate('createADrillOpen')
-                setActiveStep({ ...activeStep , createADrill: null})
-                navigate("../feed", { replace: true });
-            })
+            .then( (r) => {
+                if (r.ok) {
+                    handleCloseCreate('createADrillOpen')
+                    setActiveStep({ ...activeStep , createADrill: null})
+                    navigate("../feed", { replace: true });
+                }
+            } )
         }
     });
 

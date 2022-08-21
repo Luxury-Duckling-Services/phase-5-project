@@ -5,7 +5,7 @@ Post.destroy_all
 SportsCategory.destroy_all
 User.destroy_all
 WorkoutProgram.destroy_all
-WorkoutSession.destory_all
+WorkoutSession.destroy_all
 
 SportsCategory.create(sport_name: "soccer" , sport_image: "https://upload.wikimedia.org/wikipedia/commons/1/1d/Football_Pallo_valmiina-cropped.jpg")
 SportsCategory.create(sport_name: "basketball" , sport_image: "https://upload.wikimedia.org/wikipedia/commons/7/7a/Basketball.png")
