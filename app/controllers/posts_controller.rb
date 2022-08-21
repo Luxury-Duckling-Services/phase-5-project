@@ -2,7 +2,7 @@ class PostsController < ApplicationController
     # skip_before_action :authorize, only: :index
 
     def index
-        render json: Post.all
+        render json: Post.all.order("created_at DESC")
     end
 
     def create

@@ -56,7 +56,7 @@ function Create( { usersId } ) {
                 <MenuItem onClick={()=> {
                     if (!activeStep.createADrill) {
                         setActiveStep({...activeStep , createADrill: 0})}
-                    handleOpenCreate('createADrillOpen')
+                        handleOpenCreate('createADrillOpen')
                 }}>
                     <Typography variant='subtitle2'>Create a drill</Typography>
                 </MenuItem>

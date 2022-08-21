@@ -6,6 +6,8 @@ function CreateADrillStepTwo( { activeStep , setActiveStep , drillBeingCreated ,
         let formData = new FormData()
         formData.append('video_data' , e.target.files[0])
 
+        // console.log(drillBeingCreated)
+
         fetch(`/drills/${drillBeingCreated.id}`, {
             method: "PATCH",
             body: formData

@@ -5,7 +5,6 @@ function AvatarBar ( { usersId , setUsersId } ) {
   
   const [ userToViewProfilePicture , setUserToViewProfilePicture ] = useState(null)
   useEffect( ()=> {
-
     fetch(`/users/${usersId.userToViewId}`)
     .then(r => r.json())
     .then( (j) => {

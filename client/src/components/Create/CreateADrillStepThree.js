@@ -2,6 +2,7 @@ import { Box, Button , TextField , DialogActions , DialogContent , Stepper , Ste
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import PostCard from '../Feed/PostCard';
+import { useNavigate } from "react-router-dom";
 
 const validationSchema = Yup.object({
     post_subtitle: Yup
@@ -11,7 +12,8 @@ const validationSchema = Yup.object({
         .required('Required')
 });
 
-function CreateADrillStepThree( { usersId , activeStep , setActiveStep , drillBeingCreated } ) {
+function CreateADrillStepThree( { usersId , activeStep , setActiveStep , drillBeingCreated , handleCloseCreate } ) {
+    let navigate = useNavigate();
 
     const formik = useFormik({
         initialValues: {
@@ -32,7 +34,9 @@ function CreateADrillStepThree( { usersId , activeStep , setActiveStep , drillBe
             })
             .then(r=>r.json())
             .then(j=>{
-                console.log(j)
+                handleCloseCreate('createADrillOpen')
+                setActiveStep({ ...activeStep , createADrill: null})
+                navigate("../feed", { replace: true });
             })
         }
     });
