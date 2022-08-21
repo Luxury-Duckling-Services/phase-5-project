@@ -8,10 +8,10 @@ const validationSchema = Yup.object({
         .string('Enter a subtitle.')
         .min(5, 'Must be between 5 to 50 characters.')
         .max(50, 'Must be between 5 to 50 characters.')
-        .required('Required'),
+        .required('Required')
 });
 
-function CreateADrillStepThree( { usersId , activeStep , setActiveStep , setDrillBeingCreated } ) {
+function CreateADrillStepThree( { usersId , activeStep , setActiveStep , drillBeingCreated } ) {
 
     const formik = useFormik({
         initialValues: {
@@ -19,7 +19,21 @@ function CreateADrillStepThree( { usersId , activeStep , setActiveStep , setDril
         },
         validationSchema: validationSchema,
         onSubmit: (values) => {
-            console.log(values)
+            fetch("/posts",{
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({...values ,
+                    user_id: usersId.userId,
+                    drill_id: drillBeingCreated.id,
+                    sports_category_id: drillBeingCreated.sports_category.id
+                })
+            })
+            .then(r=>r.json())
+            .then(j=>{
+                console.log(j)
+            })
         }
     });
 

@@ -40,8 +40,8 @@ function PostCard( { post, usersId , setUsersId }) {
             <MoreVertIcon />
           </IconButton>
         }
-        title={`${post.user.name} (@${post.user.username}) created the drill "${post.drill.drill_title}"`}
-        subheader={`at ${post.created_at} and commented "${post.post_subtitle}"`}
+        title={`${post.user.name} (@${post.user.username}) created a new drill`}
+        subheader={`at ${post.created_at}`}
       />
       
       <CardMedia
@@ -51,6 +51,10 @@ function PostCard( { post, usersId , setUsersId }) {
       />
 
       <CardContent>
+        <Typography sx={{mt:-1,mb:1}} align="center" variant="body1" color="text.primary">
+          {`${post.drill.drill_title}`}<br/>
+        </Typography>
+        
         <Typography align="left" variant="body2" color="text.secondary">
           Drill instruction: {`${post.drill.instruction}`}
         </Typography>

@@ -1,8 +1,13 @@
 class PostsController < ApplicationController
-    skip_before_action :authorize, only: :index
+    # skip_before_action :authorize, only: :index
 
     def index
         render json: Post.all
+    end
+
+    def create
+        post = Post.create!(post_params)
+        render json: post, status: :created
     end
 
     private

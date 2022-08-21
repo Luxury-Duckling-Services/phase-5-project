@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   
   resources :workout_programs
   resources :workout_sessions
-  resources :posts
+  resources :posts, only: [:index , :create]
   resources :drills, only: [:create , :update , :index]
   resources :users, only: [:show, :create, :update]
   resources :sports_categories, only: [:index]

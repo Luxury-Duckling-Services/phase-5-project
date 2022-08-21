@@ -11,7 +11,7 @@ class PostSerializer < ActiveModel::Serializer
   # belongs_to :workout_program
 
   def created_at
-    object.created_at.in_time_zone("America/Los_Angeles").strftime("%B %d %Y at %I:%M %p %Z")
+    object.created_at.in_time_zone("America/Los_Angeles").strftime("%Y-%m-%d %H:%M")
   end
 
   def drill

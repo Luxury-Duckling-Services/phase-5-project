@@ -31,7 +31,7 @@ function CreateADrill( { usersId , activeStep , setActiveStep , open , handleClo
             :<></>}
 
             {activeStep.createADrill===2?
-                <CreateADrillStepThree activeStep={activeStep} setActiveStep={setActiveStep} drillBeingCreated={drillBeingCreated} />
+                <CreateADrillStepThree usersId={usersId} activeStep={activeStep} setActiveStep={setActiveStep} drillBeingCreated={drillBeingCreated} />
             :<></>}
             
         </Dialog>
