@@ -52,6 +52,7 @@ function DrillCard( { inCreateASession , drill , workoutSession , index } ) {
         validationSchema: validationSchema,
         onSubmit: (values) => {
             console.log( {
+                drill_id: drill.id,
                 set: parseInt(values.set),
                 rep: parseInt(values.rep), 
                 rest_time: parseInt(values.rest_time)

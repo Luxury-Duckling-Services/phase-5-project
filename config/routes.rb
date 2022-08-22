@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   post "/signup", to: "users#create"
   get "/search_username/:username", to: "users#search_username"
 
+  get "/search_drill_name/:drill_name", to: "drills#search_drill_name"
+
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
   

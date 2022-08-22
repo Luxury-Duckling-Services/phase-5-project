@@ -16,6 +16,10 @@ class DrillsController < ApplicationController
         render json: drill, status: :ok
     end
 
+    def search_drill_name
+        render json: User.find(session[:user_id]).drills.where("drill_title like ?" , "%#{params[:drill_name]}%")
+    end
+
     private
     
     def drill_params

@@ -1,6 +1,9 @@
-import { Box, Button , CardMedia , Grid, Typography , DialogActions , DialogContent , Stepper , Step , StepLabel } from '@mui/material';
-import DrillCard from '../Workout/DrillCard';
+import { Button , Grid , DialogActions , DialogContent , Stepper , Step , StepLabel } from '@mui/material';
+
 import { useEffect, useState } from "react";
+
+import DrillCard from '../Workout/DrillCard';
+import CreateASessionStepTwoSearchBar from './CreateASessionStepTwoSearchBar';
 
 function CreateASessionStepTwo( { activeStep , setActiveStep , sessionBeingCreated , setSessionBeingCreated } ) {
 
@@ -18,10 +21,11 @@ function CreateASessionStepTwo( { activeStep , setActiveStep , sessionBeingCreat
 
     //
 
-    const [ drillsToBeAddedToTheSession , setDrillsToBeAddedToTheSession ] = useState([])
+    const [ drillsToBeAddedToTheSession , setDrillsToBeAddedToTheSession ] = useState( [] )
 
     const handleAddTheseDrillsAndNext = () => {
-        setActiveStep({...activeStep , createASession: 2})
+        // setActiveStep({...activeStep , createASession: 2})
+        console.log( drillsToBeAddedToTheSession )
     }
 
     return (
@@ -46,16 +50,16 @@ function CreateASessionStepTwo( { activeStep , setActiveStep , sessionBeingCreat
                     
             </Stepper>
 
-            <DrillCard inCreateASession={true} drill={sampleDrill} session={sessionBeingCreated} index={1}/>
-            <DrillCard inCreateASession={true} drill={sampleDrill} session={sessionBeingCreated} index={2}/>
-            <DrillCard inCreateASession={true} drill={sampleDrill} session={sessionBeingCreated} index={3}/>
-            <DrillCard inCreateASession={true} drill={sampleDrill} session={sessionBeingCreated} index={4}/>
-            <DrillCard inCreateASession={true} drill={sampleDrill} session={sessionBeingCreated} index={5}/>
-            <DrillCard inCreateASession={true} drill={sampleDrill} session={sessionBeingCreated} index={6}/>
+            {drillsToBeAddedToTheSession.map( (drill , index) => {
+                    <DrillCard inCreateASession={true} drill={sampleDrill} session={sessionBeingCreated} index={index}/>
+                })
+            }
+
+            <CreateASessionStepTwoSearchBar/>
 
             <DialogActions>
                 <Button onClick={handleAddTheseDrillsAndNext}>
-                    Add these drills & next
+                    Confirm Session & next
                 </Button>
             </DialogActions>
 

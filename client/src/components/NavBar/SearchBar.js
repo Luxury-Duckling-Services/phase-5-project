@@ -11,6 +11,7 @@ function SearchBar( { usersId , setUsersId} ) {
 
   function handleChange(e) {
     setSearchUsername(e.target.value)
+    
     if (e.target.value.length>=5) {
       fetch(`/search_username/${e.target.value}`)
       .then( (r) =>r.json() )
@@ -50,7 +51,7 @@ function SearchBar( { usersId , setUsersId} ) {
           value={searchUsername}
           onChange={(e)=>{handleChange(e)}}
           {...params}
-          label="Searh User"
+          label="Search user"
           InputProps={{
             ...params.InputProps,
             endAdornment: (
