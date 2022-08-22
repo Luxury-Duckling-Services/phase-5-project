@@ -55,8 +55,9 @@ function Create( { usersId } ) {
             >
                 <MenuItem onClick={()=> {
                     if (!activeStep.createADrill) {
-                        setActiveStep({...activeStep , createADrill: 0})}
-                        handleOpenCreate('createADrillOpen')
+                        setActiveStep({...activeStep , createADrill: 0})
+                    }
+                    handleOpenCreate('createADrillOpen')
                 }}>
                     <Typography variant='subtitle2'>Create a drill</Typography>
                 </MenuItem>
@@ -64,8 +65,8 @@ function Create( { usersId } ) {
                 <MenuItem onClick={()=> {
                     if (!activeStep.createASession) {
                         setActiveStep({...activeStep, createASession:0})
-                        handleOpenCreate('createASessionOpen')
                     }
+                    handleOpenCreate('createASessionOpen')
                 }}>
                     <Typography variant='subtitle2'>Create a session</Typography>
                 </MenuItem>
