@@ -1,7 +1,7 @@
 import { TextField , Autocomplete , CircularProgress , Avatar , Box, Typography }from '@mui/material';
 import { useState } from "react";
 
-function CreateASessionStepTwoSearchBar( {  } ) {
+function CreateASessionStepTwoSearchBar( { insertOneDrillToTheBottom } ) {
     const [open, setOpen] = useState(false);
     const [options, setOptions] = useState([]);
     const [searchDrillName , setSearchDrillName] = useState("")
@@ -14,7 +14,6 @@ function CreateASessionStepTwoSearchBar( {  } ) {
             fetch(`/search_drill_name/${e.target.value}`)
             .then( (r) => r.json() )
             .then( (j) => {
-                console.log(j)
                 setOptions(j)
             })
         }
@@ -32,13 +31,13 @@ function CreateASessionStepTwoSearchBar( {  } ) {
             options={options}
             getOptionLabel={(option) => option.drill_title}
             loading={loading}
-            sx={{ width: "100%" , mt:1 }}
+            sx={{ width: "100%" , mt:3 }}
             renderOption={(props , option)=> (
                 <Box
                     style={{ textDecoration: 'none' }}
                     {...props}
-                    onClick={(e)=>{
-                        console.log(e)
+                    onClick={()=>{
+                        insertOneDrillToTheBottom(option)
                     }}>
                         <Typography color="textPrimary">{option.drill_title}</Typography>
                 </Box>
@@ -48,7 +47,7 @@ function CreateASessionStepTwoSearchBar( {  } ) {
                     value={searchDrillName}
                     onChange={(e)=>{handleChange(e)}}
                     {...params}
-                    label="Add your drills to the session"
+                    label="Search your drills"
                     InputProps={{
                         ...params.InputProps,
                         endAdornment: (

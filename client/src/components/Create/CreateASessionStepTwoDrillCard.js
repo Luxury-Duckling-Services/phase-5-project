@@ -41,7 +41,7 @@ const ExpandMore = styled((props) => {
     }),
 }));
 
-function DrillCard( { inCreateASession , drill , workoutSession , index } ) {
+function CreateASessionStepTwoDrillCard( { inCreateASession , drill , workoutSession , index } ) {
 
     const formik = useFormik({
         initialValues: {
@@ -60,8 +60,8 @@ function DrillCard( { inCreateASession , drill , workoutSession , index } ) {
         }
     });
 
-    const [expanded, setExpanded] = useState(false);
-    const [beingEdited , setBeingEdited] = useState(true)
+    const [ expanded, setExpanded] = useState(false);
+    const [ thisDrillCardBeingEdited , setThisDrillCardBeingEdited ] = useState(true)
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -77,11 +77,11 @@ function DrillCard( { inCreateASession , drill , workoutSession , index } ) {
             <CardContent>
                 <Grid container spacing={0}>
                     
-                    <Grid item xs={4}>
+                    <Grid item xs={3.5}>
                         <TextField
                             id="set"
                             label="Sets"
-                            placeholder="Enter number of sets for this drill..."
+                            placeholder="Number"
                             value={formik.values.set}
                             fullWidth
                             onChange={formik.handleChange}
@@ -91,11 +91,11 @@ function DrillCard( { inCreateASession , drill , workoutSession , index } ) {
                         />
                     </Grid>
 
-                    <Grid item xs={4}>
+                    <Grid item xs={3.5}>
                         <TextField
                             id="rep"
                             label="Reps"
-                            placeholder="Enter number of reps for this drill..."
+                            placeholder="Number"
                             value={formik.values.rep}
                             fullWidth
                             onChange={formik.handleChange}
@@ -105,11 +105,11 @@ function DrillCard( { inCreateASession , drill , workoutSession , index } ) {
                         />
                     </Grid>
 
-                    <Grid item xs={4}>
+                    <Grid item xs={5}>
                         <TextField
                             id="rest_time"
                             label="Rest time"
-                            placeholder="Enter rest time between sets, in seconds..."
+                            placeholder="Seconds"
                             value={formik.values.rest_time}
                             fullWidth
                             onChange={formik.handleChange}
@@ -124,13 +124,13 @@ function DrillCard( { inCreateASession , drill , workoutSession , index } ) {
 
             <CardActions disableSpacing>
         
-                {beingEdited?
+                {thisDrillCardBeingEdited?
                     <IconButton type="submit">
                         <CheckOutlinedIcon/>
                     </IconButton>
                     :
                     <IconButton onClick={()=> {
-                        setBeingEdited(true)
+                        setThisDrillCardBeingEdited(true)
                     }}>
                         <EditOutlinedIcon />
                     </IconButton>
@@ -173,4 +173,4 @@ function DrillCard( { inCreateASession , drill , workoutSession , index } ) {
     );
 }
 
-export default DrillCard;
+export default CreateASessionStepTwoDrillCard

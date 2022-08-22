@@ -2,30 +2,22 @@ import { Button , Grid , DialogActions , DialogContent , Stepper , Step , StepLa
 
 import { useEffect, useState } from "react";
 
-import DrillCard from '../Workout/DrillCard';
+import CreateASessionStepTwoDrillCard from './CreateASessionStepTwoDrillCard';
 import CreateASessionStepTwoSearchBar from './CreateASessionStepTwoSearchBar';
 
 function CreateASessionStepTwo( { activeStep , setActiveStep , sessionBeingCreated , setSessionBeingCreated } ) {
 
-    //
-
-    const [ sampleDrill , setSampleDrill ] = useState( {} )
-
-    useEffect(() => {
-        fetch('/drills')
-        .then(r=>r.json())
-        .then(j=>{
-            setSampleDrill(j[0])
-        })
-    } , [])
-
-    //
+    const [ oneDrillCardBeingEdited , setOneDrillCardBeingEdited ] = useState(false)
 
     const [ drillsToBeAddedToTheSession , setDrillsToBeAddedToTheSession ] = useState( [] )
 
     const handleAddTheseDrillsAndNext = () => {
         // setActiveStep({...activeStep , createASession: 2})
         console.log( drillsToBeAddedToTheSession )
+    }
+    
+    const insertOneDrillToTheBottom = ( drill ) => {
+        setDrillsToBeAddedToTheSession( [ ...drillsToBeAddedToTheSession , drill ])
     }
 
     return (
@@ -51,15 +43,15 @@ function CreateASessionStepTwo( { activeStep , setActiveStep , sessionBeingCreat
             </Stepper>
 
             {drillsToBeAddedToTheSession.map( (drill , index) => {
-                    <DrillCard inCreateASession={true} drill={sampleDrill} session={sessionBeingCreated} index={index}/>
+                    return <CreateASessionStepTwoDrillCard drill={drill} session={sessionBeingCreated} index={index}/>
                 })
             }
 
-            <CreateASessionStepTwoSearchBar/>
+            <CreateASessionStepTwoSearchBar insertOneDrillToTheBottom={insertOneDrillToTheBottom}/>
 
             <DialogActions>
-                <Button onClick={handleAddTheseDrillsAndNext}>
-                    Confirm Session & next
+                <Button onClick={handleAddTheseDrillsAndNext} disabled={ oneDrillCardBeingEdited || drillsToBeAddedToTheSession.length ===0 }>
+                    Finish editing & next
                 </Button>
             </DialogActions>
 
