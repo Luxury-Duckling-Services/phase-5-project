@@ -1,53 +1,40 @@
-import { Button , Dialog , DialogActions , DialogContent , DialogContentText , DialogTitle , Slide } from '@mui/material';
-import { forwardRef } from "react";
+import { Dialog , DialogTitle , Slide } from '@mui/material';
+import { useState , forwardRef } from "react";
+import CreateASessionStepOne from './CreateASessionStepOne';
+// import CreateASessionStepTwo from './CreateASessionStepTwo';
+// import CreateASessionStepThree from './CreateASessionStepThree';
 
 const Transition = forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-function CreateASession( {open , handleCloseCreate} ) {
+function CreateASession( { usersId , activeStep , setActiveStep , open , handleCloseCreate } ) {
+    const [ sessionBeingCreated , setSessionBeingCreated ] = useState({})
+
     return (
         <Dialog
-                open={open}
-                TransitionComponent={Transition}
-                keepMounted
-                onClose={()=>{
-                    handleCloseCreate('createASessionOpen')
-                }}
-                aria-describedby="alert-dialog-slide-description"
-            >
-                <DialogTitle>Session</DialogTitle>
-                <DialogContent>
-                <DialogContentText id="alert-dialog-slide-description">
-                    Let Google help apps determine location. This means sending anonymous
-                    location data to Google, even when no apps are running.
-                    Let Google help apps determine location. This means sending anonymous
-                    location data to Google, even when no apps are running.
-                    Let Google help apps determine location. This means sending anonymous
-                    location data to Google, even when no apps are running.
-                    Let Google help apps determine location. This means sending anonymous
-                    location data to Google, even when no apps are running.
-                    Let Google help apps determine location. This means sending anonymous
-                    location data to Google, even when no apps are running.
-                    Let Google help apps determine location. This means sending anonymous
-                    location data to Google, even when no apps are running.
-                    Let Google help apps determine location. This means sending anonymous
-                    location data to Google, even when no apps are running.
-                    Let Google help apps determine location. This means sending anonymous
-                    location data to Google, even when no apps are running.
-                    Let Google help apps determine location. This means sending anonymous
-                    location data to Google, even when no apps are running.
-                </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                <Button onClick={()=>{
-                    handleCloseCreate('createASessionOpen')
-                }}>Disagree</Button>
-                <Button onClick={()=>{
-                    handleCloseCreate('createASessionOpen')
-                }}>Agree</Button>
-                </DialogActions>
-            </Dialog>
+            open={open}
+            TransitionComponent={Transition}
+            keepMounted
+            onClose={()=>{
+                handleCloseCreate('createASessionOpen')
+            }}
+        >
+            <DialogTitle>Create A Workout Session</DialogTitle>
+            
+            {activeStep.createASession===0? 
+                <CreateASessionStepOne usersId={usersId} activeStep={activeStep} setActiveStep={setActiveStep} setSessionBeingCreated={setSessionBeingCreated} />
+            :<></> }
+
+            {/* {activeStep.createASession===1? 
+                <CreateASessionStepTwo activeStep={activeStep} setActiveStep={setActiveStep} sessionBeingCreated={sessionBeingCreated} setSessionBeingCreated={setSessionBeingCreated} />
+            :<></> } */}
+
+            {activeStep.createASession===2? 
+                <CreateASessionStepThree usersId={usersId} activeStep={activeStep} setActiveStep={setActiveStep} sessionBeingCreated={sessionBeingCreated} handleCloseCreate={handleCloseCreate}/>
+            :<></> }
+
+        </Dialog>
     )
 }
 

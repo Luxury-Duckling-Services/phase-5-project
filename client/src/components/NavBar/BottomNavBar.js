@@ -6,8 +6,9 @@ import FeedOutlinedIcon from '@mui/icons-material/FeedOutlined';
 import PortraitOutlinedIcon from '@mui/icons-material/PortraitOutlined';
 
 function BottomNavBar( { usersId , setUsersId } ) {
-
-    const [value, setValue] = useState(0);
+    const pathname = window.location.pathname
+    const [value, setValue] = useState(pathname)
+    
     const ref = useRef(null);
     useEffect(() => {
         ref.current.ownerDocument.body.scrollTop = 0;
@@ -29,17 +30,17 @@ function BottomNavBar( { usersId , setUsersId } ) {
                 <BottomNavigationAction onClick={()=>{
                         console.log(value)}
                     }
-                    component={Link} to="/workout" label="Workout" icon={<SportsOutlinedIcon />} />
+                    component={Link} to={"/workout"} value={"/workout"} label="Workout" icon={<SportsOutlinedIcon />} />
                 
                 <BottomNavigationAction onClick={()=>{
                         console.log(value)}
                     }
-                    component={Link} to="/feed" label="Feed" icon={<FeedOutlinedIcon />} />
+                    component={Link} to={"/feed"} value={"/feed"} label="Feed" icon={<FeedOutlinedIcon />} />
                 
                 <BottomNavigationAction onClick={()=>{
                         setUsersId({ ...usersId , userToViewId: usersId.userId})
                     }}
-                    component={Link} to="/account" label="Account" icon={<PortraitOutlinedIcon />} />
+                    component={Link} to={"/account"} value={"/account"} label="Account" icon={<PortraitOutlinedIcon />} />
 
             </BottomNavigation>
         </Paper>

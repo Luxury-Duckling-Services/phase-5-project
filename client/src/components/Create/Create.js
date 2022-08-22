@@ -62,7 +62,10 @@ function Create( { usersId } ) {
                 </MenuItem>
                 
                 <MenuItem onClick={()=> {
-                    handleOpenCreate('createASessionOpen')
+                    if (!activeStep.createASession) {
+                        setActiveStep({...activeStep, createASession:0})
+                        handleOpenCreate('createASessionOpen')
+                    }
                 }}>
                     <Typography variant='subtitle2'>Create a session</Typography>
                 </MenuItem>
@@ -76,7 +79,9 @@ function Create( { usersId } ) {
             </Menu>
 
             <CreateADrill usersId={usersId} activeStep={activeStep} setActiveStep={setActiveStep} open={createTypeOpen.createADrillOpen} handleCloseCreate={handleCloseCreate}/>
-            <CreateASession open={createTypeOpen.createASessionOpen} handleCloseCreate={handleCloseCreate}/>
+            
+            <CreateASession usersId={usersId} activeStep={activeStep} setActiveStep={setActiveStep} open={createTypeOpen.createASessionOpen} handleCloseCreate={handleCloseCreate}/>
+            
             <CreateAProgram open={createTypeOpen.createAProgramOpen} handleCloseCreate={handleCloseCreate}/>
         </Fab>
     )
