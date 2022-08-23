@@ -41,27 +41,34 @@ const ExpandMore = styled((props) => {
     }),
 }));
 
-function CreateASessionStepTwoDrillCard( { inCreateASession , drill , workoutSession , index } ) {
+function CreateASessionStepTwoDrillCard( { drill , updateSetRepRestTime , deleteDrill } ) {
+
+    const [ thisDrillCardBeingEdited , setThisDrillCardBeingEdited ] = useState(true)
 
     const formik = useFormik({
         initialValues: {
             set: 1,
             rep: 1,
-            rest_time: 15
+            rest_time: 15,
         },
         validationSchema: validationSchema,
         onSubmit: (values) => {
-            console.log( {
-                drill_id: drill.id,
-                set: parseInt(values.set),
-                rep: parseInt(values.rep), 
-                rest_time: parseInt(values.rest_time)
-            })
+            if (thisDrillCardBeingEdited) {
+                setThisDrillCardBeingEdited(false)
+                updateSetRepRestTime( {
+                    drill_id: drill.id,
+                    set: parseInt(values.set),
+                    rep: parseInt(values.rep), 
+                    rest_time: parseInt(values.rest_time),
+                } )
+            } else {
+                setThisDrillCardBeingEdited(true)
+                updateSetRepRestTime( {drill_id: drill.id} )
+            }
         }
     });
 
     const [ expanded, setExpanded] = useState(false);
-    const [ thisDrillCardBeingEdited , setThisDrillCardBeingEdited ] = useState(true)
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
@@ -70,7 +77,7 @@ function CreateASessionStepTwoDrillCard( { inCreateASession , drill , workoutSes
     return (
         <Card sx={{m:1}}>
             <CardHeader
-                subheader={`Drill ${index}: ${drill.drill_title}`}
+                subheader={`Drill: ${drill.drill_title}`}
             />
 
         <form onSubmit={formik.handleSubmit}>
@@ -79,6 +86,7 @@ function CreateASessionStepTwoDrillCard( { inCreateASession , drill , workoutSes
                     
                     <Grid item xs={3.5}>
                         <TextField
+                            disabled={!thisDrillCardBeingEdited}
                             id="set"
                             label="Sets"
                             placeholder="Number"
@@ -93,6 +101,7 @@ function CreateASessionStepTwoDrillCard( { inCreateASession , drill , workoutSes
 
                     <Grid item xs={3.5}>
                         <TextField
+                            disabled={!thisDrillCardBeingEdited}
                             id="rep"
                             label="Reps"
                             placeholder="Number"
@@ -107,6 +116,7 @@ function CreateASessionStepTwoDrillCard( { inCreateASession , drill , workoutSes
 
                     <Grid item xs={5}>
                         <TextField
+                            disabled={!thisDrillCardBeingEdited}
                             id="rest_time"
                             label="Rest time"
                             placeholder="Seconds"
@@ -129,15 +139,13 @@ function CreateASessionStepTwoDrillCard( { inCreateASession , drill , workoutSes
                         <CheckOutlinedIcon/>
                     </IconButton>
                     :
-                    <IconButton onClick={()=> {
-                        setThisDrillCardBeingEdited(true)
-                    }}>
+                    <IconButton type="submit">
                         <EditOutlinedIcon />
                     </IconButton>
                 }
 
-                <IconButton>
-                    <DeleteForeverOutlinedIcon />
+                <IconButton onClick={()=>{deleteDrill(drill.id)}}>
+                    <DeleteForeverOutlinedIcon/>
                 </IconButton>
 
                 <IconButton>

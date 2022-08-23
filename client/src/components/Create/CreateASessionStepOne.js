@@ -7,7 +7,7 @@ const validationSchema = Yup.object({
     workout_session_title: Yup
         .string('Enter a title for the workout session.')
         .min(3, 'Must be between 3 to 20 characters.')
-        .max(20, 'Must be between 3 to 20 characters.')
+        .max(40, 'Must be between 3 to 40 characters.')
         .required('Required'),
     description: Yup
         .string('Enter detailed description for the workout session.')

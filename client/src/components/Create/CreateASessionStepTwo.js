@@ -1,13 +1,11 @@
-import { Button , Grid , DialogActions , DialogContent , Stepper , Step , StepLabel } from '@mui/material';
+import { Button , DialogActions , DialogContent , Stepper , Step , StepLabel } from '@mui/material';
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import CreateASessionStepTwoDrillCard from './CreateASessionStepTwoDrillCard';
 import CreateASessionStepTwoSearchBar from './CreateASessionStepTwoSearchBar';
 
 function CreateASessionStepTwo( { activeStep , setActiveStep , sessionBeingCreated , setSessionBeingCreated } ) {
-
-    const [ oneDrillCardBeingEdited , setOneDrillCardBeingEdited ] = useState(false)
 
     const [ drillsToBeAddedToTheSession , setDrillsToBeAddedToTheSession ] = useState( [] )
 
@@ -17,7 +15,42 @@ function CreateASessionStepTwo( { activeStep , setActiveStep , sessionBeingCreat
     }
     
     const insertOneDrillToTheBottom = ( drill ) => {
-        setDrillsToBeAddedToTheSession( [ ...drillsToBeAddedToTheSession , drill ])
+        if (!( drillsToBeAddedToTheSession.map((oneDrill)=>(oneDrill.id)).includes(drill.id) )) {
+            setDrillsToBeAddedToTheSession( [ ...drillsToBeAddedToTheSession , { ...drill , thisDrillBeingEdited: true } ])
+        }
+    }
+
+    const updateSetRepRestTime = ( object ) => {
+        setDrillsToBeAddedToTheSession( drillsToBeAddedToTheSession.map( (drill) => {
+            if (drill.id === object.drill_id) {
+                
+                if (drill.thisDrillBeingEdited === true) {
+                    return { ...drill , 
+                        set: object.set,
+                        rep: object.rep,
+                        rest_time: object.rest_time,
+                        thisDrillBeingEdited: false
+                    }
+                } else {
+                    return { ... drill,
+                        thisDrillBeingEdited: true
+                    }
+                }
+
+            } else {
+                return drill
+            }
+        }) )
+    }
+
+    const deleteDrill = (id) => {
+        setDrillsToBeAddedToTheSession( drillsToBeAddedToTheSession.filter( (drill) => {
+            if (drill.id === id) {
+                return false
+            } else {
+                return true
+            }
+        }) )
     }
 
     return (
@@ -42,16 +75,22 @@ function CreateASessionStepTwo( { activeStep , setActiveStep , sessionBeingCreat
                     
             </Stepper>
 
-            {drillsToBeAddedToTheSession.map( (drill , index) => {
-                    return <CreateASessionStepTwoDrillCard drill={drill} session={sessionBeingCreated} index={index}/>
+            {drillsToBeAddedToTheSession.map( ( drill ) => {
+                    return <CreateASessionStepTwoDrillCard key={drill.id} drill={drill} updateSetRepRestTime={updateSetRepRestTime} deleteDrill={deleteDrill} />
                 })
             }
 
             <CreateASessionStepTwoSearchBar insertOneDrillToTheBottom={insertOneDrillToTheBottom}/>
 
             <DialogActions>
-                <Button onClick={handleAddTheseDrillsAndNext} disabled={ oneDrillCardBeingEdited || drillsToBeAddedToTheSession.length ===0 }>
-                    Finish editing & next
+                <Button
+                    onClick={handleAddTheseDrillsAndNext}
+                    disabled={ 
+                        drillsToBeAddedToTheSession.reduce( (previousValue , currentValue) => previousValue || currentValue.thisDrillBeingEdited , false )
+                        || drillsToBeAddedToTheSession.length ===0 }
+                    >
+                    { drillsToBeAddedToTheSession.reduce( (previousValue , currentValue) => previousValue || currentValue.thisDrillBeingEdited , false )
+                        || drillsToBeAddedToTheSession.length ===0 ? "Confirm set/rep/rest first" : "Confirm session & next" }
                 </Button>
             </DialogActions>
 
