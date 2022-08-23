@@ -16,7 +16,7 @@ function CreateASessionStepThree( { usersId , activeStep , setActiveStep , sessi
 
     const formik = useFormik({
         initialValues: {
-            post_subtitle: "Check out my new workout session!"
+            post_subtitle: "Fork my new workout session to see sets and reps!"
         },
         validationSchema: validationSchema,
         onSubmit: (values) => {

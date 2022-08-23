@@ -7,6 +7,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 import { useState } from "react"
+import { useNavigate } from "react-router-dom";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -21,8 +22,8 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-function PostCard( { post, usersId , setUsersId }) {
-
+function PostCardForSessions( { post, usersId , setUsersId }) {
+  let navigate = useNavigate();
   const [expanded, setExpanded] = useState(false);
 
   const handleExpandClick = () => {
@@ -33,31 +34,35 @@ function PostCard( { post, usersId , setUsersId }) {
     <Card sx={{m:1}}>
       <CardHeader
         avatar={
-          <Avatar src={post.user.profile_picture} />
+          <Avatar src={post.user.profile_picture} onClick={()=>{
+            setUsersId({ ...usersId, userToViewId: post.user.id})
+            navigate("../account")
+          }}/>
         }
         action={
           <IconButton>
             <MoreVertIcon />
           </IconButton>
         }
-        title={`${post.user.name} (@${post.user.username}) created a new ${post.sports_category.sport_name} drill`}
+        title={`${post.user.name} (@${post.user.username}) created a new ${post.sports_category.sport_name} session`}
         subheader={`at ${post.created_at}`}
-      />
-      
-      <CardMedia
-        component="video"    
-        controls 
-        src={post.drill.video_data}
       />
 
       <CardContent>
         <Typography sx={{mt:-1,mb:1}} align="center" variant="body1" color="text.primary">
-          {`${post.drill.drill_title}`}<br/>
+            {`${post.workout_session_title}`}
         </Typography>
+        <Typography sx={{mt:-1,mb:1}} align="left" variant="body2" color="text.primary">
+        This sessions contains the following drills:
+        </Typography>
+        {post.workout_session.map( (drill) => {
+            return (
+                <Typography align="left" variant="body1" color="text.secondary">
+                    {drill.drill_title}
+                </Typography>
+            )
+        })}
         
-        <Typography align="left" variant="body2" color="text.secondary">
-          Drill instruction: {`${post.drill.instruction}`}
-        </Typography>
       </CardContent>
 
       <CardActions disableSpacing>
@@ -89,4 +94,4 @@ function PostCard( { post, usersId , setUsersId }) {
 }
 
 
-export default PostCard
+export default PostCardForSessions

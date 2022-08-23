@@ -5,7 +5,7 @@ import { useState } from "react";
 import CreateASessionStepTwoDrillCard from './CreateASessionStepTwoDrillCard';
 import CreateASessionStepTwoSearchBar from './CreateASessionStepTwoSearchBar';
 
-function CreateASessionStepTwo( { activeStep , setActiveStep , sessionBeingCreated , setSessionBeingCreated } ) {
+function CreateASessionStepTwo( { activeStep , setActiveStep , sessionBeingCreated } ) {
 
     const [ drillsToBeAddedToTheSession , setDrillsToBeAddedToTheSession ] = useState( [] )
 
@@ -34,8 +34,7 @@ function CreateASessionStepTwo( { activeStep , setActiveStep , sessionBeingCreat
         })
 
         Promise.all(fetches).then( function() {
-            console.log(sessionBeingCreated)
-            // setActiveStep({...activeStep , createASession: 2})
+            setActiveStep({...activeStep , createASession: 2})
         })
     }
     

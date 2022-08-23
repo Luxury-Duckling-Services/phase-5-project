@@ -9,6 +9,6 @@ class Drill < ApplicationRecord
     belongs_to :sports_category
     
     has_many :drill_session_joins
-    has_many :workout_sessions, through: :drill_session_join
+    has_many :workout_sessions, through: :drill_session_joins
     
 end
