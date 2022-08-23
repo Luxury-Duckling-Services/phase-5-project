@@ -148,12 +148,12 @@ function CreateASessionStepTwoDrillCard( { drill , updateSetRepRestTime , delete
                     <DeleteForeverOutlinedIcon/>
                 </IconButton>
 
-                <IconButton>
-                    <ArrowUpwardOutlinedIcon onClick={()=>{moveUp(drill.id)}}/>
+                <IconButton onClick={()=>{moveUp(drill.id)}}>
+                    <ArrowUpwardOutlinedIcon/>
                 </IconButton>
 
-                <IconButton>
-                    <ArrowDownwardOutlinedIcon onClick={()=>{moveDown(drill.id)}}/>
+                <IconButton onClick={()=>{moveDown(drill.id)}}>
+                    <ArrowDownwardOutlinedIcon/>
                 </IconButton>
             
                 <ExpandMore

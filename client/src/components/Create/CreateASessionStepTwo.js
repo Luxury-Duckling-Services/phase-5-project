@@ -10,8 +10,33 @@ function CreateASessionStepTwo( { activeStep , setActiveStep , sessionBeingCreat
     const [ drillsToBeAddedToTheSession , setDrillsToBeAddedToTheSession ] = useState( [] )
 
     const handleAddTheseDrillsAndNext = () => {
-        // setActiveStep({...activeStep , createASession: 2})
-        console.log( drillsToBeAddedToTheSession )
+        
+        let fetches = []
+
+        drillsToBeAddedToTheSession.forEach( (drill , index) => {
+            fetches.push(
+                fetch('/drill_session_joins' , {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify( {
+                        drill_id: drill.id,
+                        rep: drill.rep,
+                        set: drill.set,
+                        rest_time: drill.rest_time,
+                        workout_session_id: sessionBeingCreated.id,
+                        index: index+1
+                    } )
+                })
+                .then( (r)=> {} )
+            )  
+        })
+
+        Promise.all(fetches).then( function() {
+            console.log(sessionBeingCreated)
+            // setActiveStep({...activeStep , createASession: 2})
+        })
     }
     
     const insertOneDrillToTheBottom = ( drill ) => {

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :create, :update]
   resources :sports_categories, only: [:index]
   resources :favorite_sports, only: [:create]
+  resources :drill_session_joins, only: [:create , :index]
 
   get "/me", to: "users#show_myself"
   post "/signup", to: "users#create"
