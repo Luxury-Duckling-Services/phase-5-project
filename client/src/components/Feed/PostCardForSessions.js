@@ -4,7 +4,7 @@ import { Card , CardHeader , CardMedia , CardContent , CardActions , Collapse , 
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import ContentCopyOutlinedIcon from '@mui/icons-material/ContentCopyOutlined';
 
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";
@@ -22,7 +22,7 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-function PostCardForSessions( { post, usersId , setUsersId }) {
+function PostCardForSessions( { post, usersId , setUsersId , handleFork }) {
   let navigate = useNavigate();
   const [expanded, setExpanded] = useState(false);
 
@@ -40,8 +40,11 @@ function PostCardForSessions( { post, usersId , setUsersId }) {
           }}/>
         }
         action={
-          <IconButton>
-            <MoreVertIcon />
+          <IconButton onClick={()=>{
+            handleFork(post.workout_session.id)
+            navigate("../workout")
+          }}>
+            <ContentCopyOutlinedIcon/>
           </IconButton>
         }
         title={`${post.user.name} (@${post.user.username}) created a new ${post.sports_category.sport_name} session`}
@@ -49,15 +52,18 @@ function PostCardForSessions( { post, usersId , setUsersId }) {
       />
 
       <CardContent>
-        <Typography sx={{mt:-1,mb:1}} align="center" variant="body1" color="text.primary">
-            {`${post.workout_session_title}`}
+        <Typography sx={{mt:-3,mb:2}} align="center" variant="body1" color="text.primary">
+          {`${post.workout_session.workout_session_title}`}
         </Typography>
-        <Typography sx={{mt:-1,mb:1}} align="left" variant="body2" color="text.primary">
-        This sessions contains the following drills:
+        <Typography sx={{mt:-1,mb:3}} align="left" variant="body2" color="text.secondary">
+          {`Workout session description: ${post.workout_session.description}`}
         </Typography>
-        {post.workout_session.map( (drill) => {
+        <Typography sx={{mt:0,mb:0}} align="left" variant="body2" color="text.primary">
+          This sessions contains the following drills:
+        </Typography>
+        {post.drills_in_the_workout_session.map( (drill) => {
             return (
-                <Typography align="left" variant="body1" color="text.secondary">
+                <Typography key={drill.id} align="left" variant="body1" color="text.secondary">
                     {drill.drill_title}
                 </Typography>
             )

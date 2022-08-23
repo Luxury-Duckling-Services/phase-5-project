@@ -1,7 +1,7 @@
 class PostSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
 
-  attributes :id, :post_subtitle, :workout_session, :workout_program, :drill, :workout_session , :workout_session_title , :workout_program, :created_at
+  attributes :id, :post_subtitle, :workout_session, :workout_program, :drill, :workout_session , :drills_in_the_workout_session , :workout_program, :created_at
 
   belongs_to :user
   belongs_to :sports_category
@@ -24,7 +24,7 @@ class PostSerializer < ActiveModel::Serializer
     end
   end
 
-  def workout_session
+  def drills_in_the_workout_session
     if self.object.workout_session_id
       return WorkoutSession.find( self.object.workout_session_id ).drills
     else
@@ -32,9 +32,9 @@ class PostSerializer < ActiveModel::Serializer
     end
   end
 
-  def workout_session_title
+  def workout_session
     if self.object.workout_session_id
-      return WorkoutSession.find( self.object.workout_session_id ).workout_session_title
+      return WorkoutSession.find( self.object.workout_session_id )
     else
       return nil
     end

@@ -5,9 +5,15 @@ import TopNavBar from "./NavBar/TopNavBar.js";
 import BottomNavBar from "./NavBar/BottomNavBar.js";
 import CommunityFeed from "./Feed/CommunityFeed.js";
 import User from "./User/User.js";
+import Workout from "./Workout/Workout.js";
 
 function App() {
   const [usersId, setUsersId] = useState(null);
+  const [ listOfDrillsOnWorkoutPage , setListOfDrillsOnWorkoutPage] = useState(null)
+
+  const handleFork = ( workoutSessionId) => {
+    
+  }
 
   useEffect(() => {
     fetch("/me")
@@ -31,8 +37,10 @@ function App() {
       <TopNavBar usersId={usersId} setUsersId={setUsersId} />
       
       <Routes>
+
+        <Route path="/workout" element={ <Workout listOfDrills={listOfDrillsOnWorkoutPage}/>}/>
         
-        <Route path="/feed" element={ <CommunityFeed usersId={usersId} setUsersId={setUsersId}/> } />
+        <Route path="/feed" element={ <CommunityFeed usersId={usersId} setUsersId={setUsersId} handleFork={handleFork}/> } />
         
         <Route path="/account" element={ <User usersId={usersId} setUsersId={setUsersId}/> } />
       

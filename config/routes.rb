@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   
   resources :workout_programs
-  resources :workout_sessions, only: [:create , :index]
+  resources :workout_sessions, only: [:create , :index , :show]
   resources :posts, only: [:index , :create]
   resources :drills, only: [:create , :update , :index]
   resources :users, only: [:show, :create, :update]

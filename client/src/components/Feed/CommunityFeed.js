@@ -3,13 +3,14 @@ import PostCardForSessions from "./PostCardForSessions"
 import { Grid } from '@mui/material';
 import { useState , useEffect } from 'react';
 
-function CommunityFeed( { usersId , setUsersId } ) {
+function CommunityFeed( { usersId , setUsersId , handleFork } ) {
     const [ allPosts , setAllPosts ] = useState( [] )
 
     useEffect( ()=> {
         fetch('/posts')
         .then( r=> r.json())
         .then( (j)=> {
+            console.log(j)
             setAllPosts(j)
         })
     } , [])
@@ -22,7 +23,7 @@ function CommunityFeed( { usersId , setUsersId } ) {
                             return <PostCardForDrills key={post.id} usersId={usersId} setUsersId={setUsersId} post={ post }/>
                         }
                         if (post.workout_session) {
-                            return <PostCardForSessions key={post.id} usersId={usersId} setUsersId={setUsersId} post={ post }/>
+                            return <PostCardForSessions key={post.id} usersId={usersId} setUsersId={setUsersId} post={ post } handleFork={handleFork} />
                         }
                     }
                 )}

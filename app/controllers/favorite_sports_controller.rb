@@ -1,5 +1,5 @@
 class FavoriteSportsController < ApplicationController
-    skip_before_action :authorize
+    skip_before_action :authorize, only: :create
 
     def create
         params[:selected_sports_names].each do |name|

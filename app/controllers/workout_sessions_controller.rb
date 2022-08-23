@@ -1,5 +1,5 @@
 class WorkoutSessionsController < ApplicationController
-    skip_before_action :authorize, only: :index
+    # skip_before_action :authorize, only: [ :index , :show]
 
     def index
         render json: WorkoutSession.all
@@ -8,6 +8,10 @@ class WorkoutSessionsController < ApplicationController
     def create
         workout_session = WorkoutSession.create!(workout_session_params)
         render json: workout_session, status: :created
+    end
+
+    def show
+        render json: WorkoutSession.find( params[:id] )
     end
 
     private
