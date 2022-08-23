@@ -53,6 +53,38 @@ function CreateASessionStepTwo( { activeStep , setActiveStep , sessionBeingCreat
         }) )
     }
 
+    const moveUp = (id) => {
+        let temp
+        let drillsToBeAddedToTheSessionCopy = [ ...drillsToBeAddedToTheSession ]
+        
+        drillsToBeAddedToTheSession.forEach( (drill , index) => {
+            if (drill.id === id) {
+                if (index !==0) {
+                    temp = {...drill}
+                    drillsToBeAddedToTheSessionCopy[index] = { ...drillsToBeAddedToTheSessionCopy[index-1]}
+                    drillsToBeAddedToTheSessionCopy[index-1] = {...temp}
+                }
+            }
+        })
+        setDrillsToBeAddedToTheSession( [...drillsToBeAddedToTheSessionCopy] )
+    }
+
+    const moveDown = (id) => {
+        let temp
+        let drillsToBeAddedToTheSessionCopy = [ ...drillsToBeAddedToTheSession ]
+        
+        drillsToBeAddedToTheSession.forEach( (drill , index) => {
+            if (drill.id === id) {
+                if (index !== drillsToBeAddedToTheSessionCopy.length -1) {
+                    temp = {...drill}
+                    drillsToBeAddedToTheSessionCopy[index] = { ... drillsToBeAddedToTheSessionCopy[index+1]}
+                    drillsToBeAddedToTheSessionCopy[index+1] = {...temp}
+                }
+            }
+        })
+        setDrillsToBeAddedToTheSession( [...drillsToBeAddedToTheSessionCopy] )
+    }
+
     return (
         <DialogContent>
             <Stepper
@@ -75,8 +107,8 @@ function CreateASessionStepTwo( { activeStep , setActiveStep , sessionBeingCreat
                     
             </Stepper>
 
-            {drillsToBeAddedToTheSession.map( ( drill ) => {
-                    return <CreateASessionStepTwoDrillCard key={drill.id} drill={drill} updateSetRepRestTime={updateSetRepRestTime} deleteDrill={deleteDrill} />
+            {drillsToBeAddedToTheSession.map( ( drill , index ) => {
+                    return <CreateASessionStepTwoDrillCard key={drill.id} drill={drill} updateSetRepRestTime={updateSetRepRestTime} deleteDrill={deleteDrill} moveUp={moveUp} moveDown={moveDown} index={index} />
                 })
             }
 

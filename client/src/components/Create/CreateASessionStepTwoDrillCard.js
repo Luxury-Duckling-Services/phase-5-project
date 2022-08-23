@@ -41,7 +41,7 @@ const ExpandMore = styled((props) => {
     }),
 }));
 
-function CreateASessionStepTwoDrillCard( { drill , updateSetRepRestTime , deleteDrill } ) {
+function CreateASessionStepTwoDrillCard( { drill , updateSetRepRestTime , deleteDrill , moveUp , moveDown , index } ) {
 
     const [ thisDrillCardBeingEdited , setThisDrillCardBeingEdited ] = useState(true)
 
@@ -77,7 +77,7 @@ function CreateASessionStepTwoDrillCard( { drill , updateSetRepRestTime , delete
     return (
         <Card sx={{m:1}}>
             <CardHeader
-                subheader={`Drill: ${drill.drill_title}`}
+                subheader={`Drill #${index+1}: ${drill.drill_title}`}
             />
 
         <form onSubmit={formik.handleSubmit}>
@@ -149,11 +149,11 @@ function CreateASessionStepTwoDrillCard( { drill , updateSetRepRestTime , delete
                 </IconButton>
 
                 <IconButton>
-                    <ArrowUpwardOutlinedIcon />
+                    <ArrowUpwardOutlinedIcon onClick={()=>{moveUp(drill.id)}}/>
                 </IconButton>
 
                 <IconButton>
-                    <ArrowDownwardOutlinedIcon />
+                    <ArrowDownwardOutlinedIcon onClick={()=>{moveDown(drill.id)}}/>
                 </IconButton>
             
                 <ExpandMore
