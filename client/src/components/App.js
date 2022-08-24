@@ -9,10 +9,14 @@ import Workout from "./Workout/Workout.js";
 
 function App() {
   const [usersId, setUsersId] = useState(null);
-  const [ listOfDrillsOnWorkoutPage , setListOfDrillsOnWorkoutPage] = useState(null)
+  const [ listOfDrillsOnWorkoutPage , setListOfDrillsOnWorkoutPage ] = useState([])
 
   const handleFork = ( workoutSessionId) => {
-    
+    fetch(`workout_sessions/${workoutSessionId}`)
+    .then(r=>r.json())
+    .then(j=> {
+      setListOfDrillsOnWorkoutPage(j)
+    })
   }
 
   useEffect(() => {

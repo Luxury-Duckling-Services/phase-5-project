@@ -1,6 +1,6 @@
 import DrillCard from "./DrillCard";
 
-function Workout( {listOfDrills} ) {
+function Workout( { listOfDrills } ) {
     return (
         <></>
     )

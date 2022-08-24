@@ -10,7 +10,6 @@ function CommunityFeed( { usersId , setUsersId , handleFork } ) {
         fetch('/posts')
         .then( r=> r.json())
         .then( (j)=> {
-            console.log(j)
             setAllPosts(j)
         })
     } , [])
