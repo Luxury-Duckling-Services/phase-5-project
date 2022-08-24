@@ -15,8 +15,13 @@ function App() {
     fetch(`workout_sessions/${workoutSessionId}`)
     .then(r=>r.json())
     .then(j=> {
+      console.log(j)
       setInfoOnWorkoutPage(j)
     })
+  }
+
+  const clearWorkout = () => {
+    setInfoOnWorkoutPage({ list_of_drills_on_workout_page: [] })
   }
 
   useEffect(() => {
@@ -42,7 +47,7 @@ function App() {
       
       <Routes>
 
-        <Route path="/workout" element={ <Workout info={infoOnWorkoutPage}/>}/>
+        <Route path="/workout" element={ <Workout info={infoOnWorkoutPage} clearWorkout={clearWorkout}/>}/>
         
         <Route path="/feed" element={ <CommunityFeed usersId={usersId} setUsersId={setUsersId} handleFork={handleFork}/> } />
         

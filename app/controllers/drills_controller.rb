@@ -10,6 +10,10 @@ class DrillsController < ApplicationController
         render json: drill, status: :created
     end
 
+    def show
+        render json: Drill.find( params[:id])
+    end
+
     def update
         drill = Drill.find(params[:id])
         drill.update!(drill_params)
