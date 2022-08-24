@@ -11,7 +11,14 @@ class WorkoutSessionsController < ApplicationController
     end
 
     def show
-        render json: DrillSessionJoin.where( workout_session_id: params[:id] ).sort_by { |obj| obj.index }.map { |join| { set: join.set , rep: join.rep , rest_time: join.rest_time, **JSON.parse(join.drill.to_json)} }
+        list_of_drill = DrillSessionJoin.where( workout_session_id: params[:id] ).sort_by { |obj| obj.index }.map { |join| { set: join.set , rep: join.rep , rest_time: join.rest_time, **JSON.parse(join.drill.to_json)} }
+        render json: {
+            list_of_drills_on_workout_page: list_of_drill,
+            workout_session_title: WorkoutSession.find( params[:id] ).workout_session_title,
+            description: WorkoutSession.find( params[:id] ).description,
+            creator: WorkoutSession.find( params[:id] ).user,
+            sports_category: WorkoutSession.find( params[:id] ).sports_category
+        }
     end
 
     private

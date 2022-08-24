@@ -4,7 +4,6 @@ import { Card , CardHeader , CardMedia , CardContent , CardActions , Collapse , 
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 import { useState } from "react"
 import { useNavigate } from "react-router-dom";

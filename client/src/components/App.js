@@ -9,13 +9,13 @@ import Workout from "./Workout/Workout.js";
 
 function App() {
   const [usersId, setUsersId] = useState(null);
-  const [ listOfDrillsOnWorkoutPage , setListOfDrillsOnWorkoutPage ] = useState([])
+  const [ infoOnWorkoutPage , setInfoOnWorkoutPage ] = useState({ list_of_drills_on_workout_page: [] })
 
-  const handleFork = ( workoutSessionId) => {
+  const handleFork = ( workoutSessionId ) => {
     fetch(`workout_sessions/${workoutSessionId}`)
     .then(r=>r.json())
     .then(j=> {
-      setListOfDrillsOnWorkoutPage(j)
+      setInfoOnWorkoutPage(j)
     })
   }
 
@@ -42,7 +42,7 @@ function App() {
       
       <Routes>
 
-        <Route path="/workout" element={ <Workout listOfDrills={listOfDrillsOnWorkoutPage}/>}/>
+        <Route path="/workout" element={ <Workout info={infoOnWorkoutPage}/>}/>
         
         <Route path="/feed" element={ <CommunityFeed usersId={usersId} setUsersId={setUsersId} handleFork={handleFork}/> } />
         
